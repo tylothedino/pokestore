@@ -37,56 +37,56 @@ def seed_products():
         db.session.add(new_product)
     db.session.commit()
 
-    # for i in range(114, 125):
+    for i in range(114, 125):
 
-    #     item = get_item_data(i)
+        item = get_item_data(i)
 
-    #     new_product = Product(
-    #         name=item["names"][5]["name"],
-    #         price=item["cost"],
-    #         category=item["category"]["name"],
-    #         effect=item["effect_entries"][0]["effect"],
-    #         description=item["flavor_text_entries"][0]["text"],
-    #         image=item["sprites"]["default"],
-    #         user_id=1,
-    #     )
+        new_product = Product(
+            name=item["names"][5]["name"],
+            price=item["cost"],
+            category=item["category"]["name"],
+            effect=item["effect_entries"][0]["effect"],
+            description=item["flavor_text_entries"][0]["text"],
+            image=item["sprites"]["default"],
+            user_id=1,
+        )
 
-    #     db.session.add(new_product)
-    # db.session.commit()
+        db.session.add(new_product)
+    db.session.commit()
 
-    # for i in range(126, 293):
+    for i in range(126, 293):
 
-    #     item = get_item_data(i)
+        item = get_item_data(i)
 
-    #     new_product = Product(
-    #         name=item["names"][7]["name"],
-    #         price=item["cost"],
-    #         category=item["category"]["name"],
-    #         effect=item["effect_entries"][0]["effect"],
-    #         description=item["flavor_text_entries"][5]["text"],
-    #         image=item["sprites"]["default"],
-    #         user_id=2,
-    #     )
+        new_product = Product(
+            name=item["names"][7]["name"],
+            price=item["cost"],
+            category=item["category"]["name"],
+            effect=item["effect_entries"][0]["effect"],
+            description=item["flavor_text_entries"][5]["text"],
+            image=item["sprites"]["default"],
+            user_id=2,
+        )
 
-    #     db.session.add(new_product)
-    # db.session.commit()
+        db.session.add(new_product)
+    db.session.commit()
 
-    # for i in range(295, 404):
+    for i in range(295, 404):
 
-    #     item = get_item_data(i)
+        item = get_item_data(i)
 
-    #     new_product = Product(
-    #         name=item["names"][7]["name"],
-    #         price=item["cost"],
-    #         category=item["category"]["name"],
-    #         effect=item["effect_entries"][0]["effect"],
-    #         description=item["flavor_text_entries"][5]["text"],
-    #         image=item["sprites"]["default"],
-    #         user_id=3,
-    #     )
+        new_product = Product(
+            name=item["names"][7]["name"],
+            price=item["cost"],
+            category=item["category"]["name"],
+            effect=item["effect_entries"][0]["effect"],
+            description=item["flavor_text_entries"][5]["text"],
+            image=item["sprites"]["default"],
+            user_id=3,
+        )
 
-    #     db.session.add(new_product)
-    # db.session.commit()
+        db.session.add(new_product)
+    db.session.commit()
 
 
 def undo_products():
