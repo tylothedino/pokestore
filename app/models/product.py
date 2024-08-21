@@ -13,9 +13,9 @@ class Product(db.Model):
         __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    category = db.Column(db.String, nullable=False)
+    category = db.Column(db.String(255), nullable=False)
     effect = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
     image = db.Column(db.String, nullable=False)
