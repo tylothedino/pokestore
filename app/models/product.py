@@ -16,9 +16,9 @@ class Product(db.Model):
     name = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Integer, nullable=False)
     category = db.Column(db.String(255), nullable=False)
-    effect = db.Column(db.String(255), nullable=False)
-    description = db.Column(db.String(255), nullable=False)
-    image = db.Column(db.String(255), nullable=False)
+    effect = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=False)
+    image = db.Column(db.String, nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
 
