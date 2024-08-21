@@ -2,17 +2,31 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+from .review_likes import review_likes
+
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+        __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    address = db.Column(db.String(255), nullable=False)
+    first_name = db.Column(db.String(30), nullable=False)
+    last_name = db.Column(db.String(30), nullable=False)
+
+    products = db.relationship("Product", back_populates="owner")
+    orders = db.relationship("Order", back_populates="user")
+    lists = db.relationship("List", back_populates="user")
+    reviews = db.relationship("Review", back_populates="owner")
+
+    likes = db.relationship(
+        "Review", secondary=review_likes, back_populates="user_likes"
+    )
 
     @property
     def password(self):
@@ -27,7 +41,12 @@ class User(db.Model, UserMixin):
 
     def to_dict(self):
         return {
-            'id': self.id,
-            'username': self.username,
-            'email': self.email
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "address": self.address,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "products": self.products,
+            "orders": self.orders,
         }
