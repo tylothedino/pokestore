@@ -88,23 +88,6 @@ def seed_products():
         db.session.add(new_product)
     db.session.commit()
 
-    # for i in range(405, 450):
-
-    #     item = get_item_data(i)
-
-    #     new_product = Product(
-    #         name=item["names"][7]["name"],
-    #         price=item["cost"],
-    #         category=item["category"]["name"],
-    #         effect=item["effect_entries"][0]["effect"],
-    #         description=item["flavor_text_entries"][5]["text"],
-    #         image=item["sprites"]["default"],
-    #         user_id=2,
-    #     )
-
-    #     db.session.add(new_product)
-    # db.session.commit()
-
 
 def undo_products():
     if environment == "production":
