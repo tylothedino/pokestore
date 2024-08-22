@@ -5,6 +5,8 @@ from .cart import undo_cart
 from .list import seed_list, undo_lists
 from .cart_products import seed_cart_products, undo_cart_products
 from .order import seed_orders, undo_orders
+from .review import seed_review, undo_review
+from .review_likes import seed_review_likes, undo_review_likes
 
 from app.models.db import db, environment, SCHEMA
 
@@ -27,11 +29,15 @@ def seed():
         undo_lists()
         undo_cart_products()
         undo_orders()
+        undo_review()
+        undo_review_likes()
     seed_users()
     seed_products()
     seed_list()
     seed_cart_products()
     seed_orders()
+    seed_review()
+    seed_review_likes()
     # Add other seed functions here
 
 
@@ -44,4 +50,6 @@ def undo():
     undo_lists()
     undo_cart_products()
     undo_orders()
+    undo_review()
+    undo_review_likes()
     # Add other undo functions here
