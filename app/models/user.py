@@ -2,6 +2,9 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+from .cart import Cart
+from sqlalchemy import event
+
 from .review_likes import review_likes
 
 
@@ -28,6 +31,8 @@ class User(db.Model, UserMixin):
         "Review", secondary=review_likes, back_populates="user_likes"
     )
 
+    cart = db.relationship("Cart", back_populates="user", cascade="all, delete-orphan")
+
     @property
     def password(self):
         return self.hashed_password
@@ -50,3 +55,15 @@ class User(db.Model, UserMixin):
             "products": self.products,
             "orders": self.orders,
         }
+
+
+@event.listens_for(User, "after_insert")
+def after_user_insert(mapper, connection, target):
+    new_cart = Cart(
+        user_id=target.id
+    )  # Create a new Cart instance with the user_id set
+    db.session.add(new_cart)  # Add the new cart using connection
+
+
+# # Listen for the 'after_insert' event on the User model
+# event.listen(User, "after_insert", create_cart_on_user_creation)

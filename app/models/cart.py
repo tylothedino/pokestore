@@ -13,11 +13,15 @@ class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now)
-    user_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(
+        db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
+    )
 
     products = db.relationship(
         "Product", secondary=cart_products, back_populates="cart"
     )
+
+    user = db.relationship("User", back_populates="cart")
 
     def to_dict(self):
         return {"id": self.id, "updated_at": self.updated_at, "products": self.products}
