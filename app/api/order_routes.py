@@ -65,4 +65,6 @@ def cancel_order(id):
     order.total_cost = 0
     order.delivery_date = None
 
+    db.session.commit()
+
     return {"message": "Order cancelled"}
