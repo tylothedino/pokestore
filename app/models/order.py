@@ -11,7 +11,7 @@ class Order(db.Model):
         __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    status = db.Column(db.Boolean, nullable=False)
+    status = db.Column(db.String, nullable=False)
     total_cost = db.Column(db.Integer, nullable=False)
     delivery_date = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
