@@ -62,7 +62,11 @@ def product_category(category):
 @product_routes.route("/<int:id>")
 def search_product_id(id):
     product = Product.query.get(id)
-    return product.to_dict()
+
+    if product is None:
+        return {"errors": {"message": "Not Found"}}, 404
+
+    return {"product": product.to_dict()}
 
 
 @product_routes.route("/search", methods=["POST"])
@@ -76,7 +80,7 @@ def search_product_name():
         return product.to_dict()
 
     else:
-        return {"message": "Product not found."}
+        return {"message": "Product not found."}, 404
 
 
 @product_routes.route("/new", methods=["POST"])
@@ -110,6 +114,7 @@ def delete_product(id):
     product = Product.query.get(id)
     if product is None:
         return {"errors": {"message": "Not Found"}}, 404
+
     if product.user_id != current_user.id:
         return {"errors": {"message": "Unauthorized"}}, 401
 
