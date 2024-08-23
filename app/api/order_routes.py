@@ -41,10 +41,10 @@ def update_order(id):
     body = request.get_json()
 
     if body["status"]:
-        if body["status"] not in order_routes and body["status"] is not None:
+        if body["status"] not in order_status and body["status"] is not None:
             return {"errors": {"message": "Bad status"}}, 400
         order.status = body["status"]
-    if body["delivery_date"] and body["status"] is "Pending":
+    if body["delivery_date"] and body["status"] == "Pending":
         order.delivery_date = body["delivery_date"]
 
     db.session.commit()

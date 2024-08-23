@@ -33,7 +33,7 @@ class Product(db.Model):
     orders = db.relationship(
         "Order", secondary=order_products, back_populates="products"
     )
-    cart = db.relationship("Cart", secondary=cart_products, back_populates="products")
+    carts = db.relationship("Cart", secondary=cart_products, back_populates="products")
     list = db.relationship("List", secondary=list_products, back_populates="products")
 
     def to_dict(self):
@@ -45,4 +45,5 @@ class Product(db.Model):
             "effect": self.effect,
             "description": self.description,
             "image": self.image,
+            "reviews": [review.to_dict() for review in self.reviews],
         }

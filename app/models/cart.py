@@ -4,7 +4,6 @@ from .cart_product import cart_products
 
 
 class Cart(db.Model):
-
     __tablename__ = "carts"
 
     if environment == "production":
@@ -18,10 +17,14 @@ class Cart(db.Model):
     )
 
     products = db.relationship(
-        "Product", secondary=cart_products, back_populates="cart"
+        "Product", secondary=cart_products, back_populates="carts"
     )
 
     user = db.relationship("User", back_populates="cart")
 
     def to_dict(self):
-        return {"id": self.id, "updated_at": self.updated_at, "products": self.products}
+        return {
+            "id": self.id,
+            "updated_at": self.updated_at,
+            "products": [product.to_dict() for product in self.products],
+        }

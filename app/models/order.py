@@ -30,7 +30,7 @@ class Order(db.Model):
             "status": self.status,
             "total_cost": self.total_cost,
             "delivery_date": self.delivery_date,
-            "user": self.user,
+            "user_id": self.user_id,
             "created_at": self.created_at,
-            "products": self.products,
+            "products": [product.to_dict() for product in self.products],
         }

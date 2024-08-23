@@ -52,8 +52,18 @@ class User(db.Model, UserMixin):
             "address": self.address,
             "first_name": self.first_name,
             "last_name": self.last_name,
-            "products": self.products,
-            "orders": self.orders,
+            "products": [product.to_dict() for product in self.products],
+            "orders": [order.to_dict() for order in self.orders],
+            "cart": len(self.cart[0].products),
+            # "cart": [product.to_dict() for product in self.cart],
+        }
+
+    def to_dict_review(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
         }
 
 
@@ -63,7 +73,3 @@ def after_user_insert(mapper, connection, target):
         user_id=target.id
     )  # Create a new Cart instance with the user_id set
     db.session.add(new_cart)  # Add the new cart using connection
-
-
-# # Listen for the 'after_insert' event on the User model
-# event.listen(User, "after_insert", create_cart_on_user_creation)

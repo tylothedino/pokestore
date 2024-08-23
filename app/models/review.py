@@ -15,6 +15,7 @@ class Review(db.Model):
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     image = db.Column(db.String(255), nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
     product_id = db.Column(
@@ -35,7 +36,8 @@ class Review(db.Model):
             "name": self.name,
             "description": self.description,
             "image": self.image,
-            "created_at": self.created_at,
+            "updated_at": self.updated_at,
             "product_id": self.product_id,
-            "user_id": self.user_id,
+            "owner": self.owner.to_dict_review(),
+            "rating": self.rating,
         }

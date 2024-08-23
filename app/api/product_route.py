@@ -72,12 +72,12 @@ def search_product_id(id):
 @product_routes.route("/search", methods=["POST"])
 def search_product_name():
     product_name = request.get_json()
-    product = Product.query.filter(
-        func.lower(Product.name) == func.lower(product_name["name"])
-    ).first()
+    products = Product.query.filter(
+        func.lower(Product.name).like(f"%{func.lower(product_name['name'])}%")
+    ).all()
 
-    if product:
-        return product.to_dict()
+    if products:
+        return {"products": [product.to_dict() for product in products]}
 
     else:
         return {"message": "Product not found."}, 404
@@ -178,7 +178,8 @@ def add_review(id):
     has_ordered = False
 
     for order in current_user.orders:
-        if order.products == product:
+        if product in order.products:
+            print("HAS ORDERED")
             has_ordered = True
             break
     if has_ordered:
@@ -186,6 +187,7 @@ def add_review(id):
             name=body["name"],
             description=body["description"],
             image=body["image"],
+            rating=body["rating"],
             user_id=current_user.id,
             product_id=id,
         )
@@ -194,6 +196,7 @@ def add_review(id):
 
         return {"review": review.to_dict()}
     else:
+        print("DID NOT ORDER")
         return {"errors": {"message": "You have not bought this"}}, 401
 
 
