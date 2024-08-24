@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Product, db, Review, Cart
+from app.models import Product, db, Review, Cart, CartProduct
 from sqlalchemy import func
 
 product_routes = Blueprint("products", __name__)
@@ -205,16 +205,21 @@ def add_review(id):
 def add_to_cart(id):
     body = request.get_json()
     product = Product.query.get(id)
-
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
-
+    existing_cart = CartProduct.query.filter_by(
+        cart_id=cart.id, product_id=product.id
+    ).first()
     amount = body["amount"]
 
     if product is None:
         return {"errors": {"message": "Not Found"}}, 404
 
-    for _ in range(amount):
-        cart.products.append(product)
+    if existing_cart is None:
+        cartProduct = CartProduct(cart_id=cart.id, product_id=product.id, amount=amount)
+        db.session.add(cartProduct)
+    else:
+        existing_cart.amount += amount
+
     db.session.commit()
 
     return {"message": f"Added {amount} {product.name} to your cart"}

@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
-from .cart_product import cart_products
+
+# from .cart_product import cart_products
 
 
 class Cart(db.Model):
@@ -16,8 +17,8 @@ class Cart(db.Model):
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
 
-    products = db.relationship(
-        "Product", secondary=cart_products, back_populates="carts"
+    cart_products = db.relationship(
+        "CartProduct", backref="cart", cascade="all, delete-orphan"
     )
 
     user = db.relationship("User", back_populates="cart")
@@ -26,5 +27,6 @@ class Cart(db.Model):
         return {
             "id": self.id,
             "updated_at": self.updated_at,
-            "products": [product.to_dict() for product in self.products],
+            "products": [product.to_dict() for product in self.cart_products],
+            # "products": self.cart_products[0].to_dict(),
         }

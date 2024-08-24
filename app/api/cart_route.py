@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Cart, db, Order, Product
+from app.models import Cart, db, Order, Product, CartProduct
 import re
 
 cart_routes = Blueprint("carts", __name__)
@@ -27,32 +27,29 @@ def clear_cart():
 @login_required
 def remove_product(product_id):
 
-    # Grab amount
     body = request.get_json()
+    product = Product.query.get(product_id)
+    cart = Cart.query.filter(Cart.user_id == current_user.id).first()
+    existing_cart = CartProduct.query.filter_by(
+        cart_id=cart.id, product_id=product.id
+    ).first()
     amount = body["amount"]
 
-    # Find the product
-    product = Product.query.get(product_id)
-    # Grab the user's cart
-    cart = Cart.query.filter(Cart.user_id == current_user.id).first()
+    if product is None:
+        return {"errors": {"message": "Not Found"}}, 404
 
-    # Find if the cart has the product
-    cart_product = re.findall(product, cart.products)
+    if existing_cart.amount < amount:
+        return {"errors": {"message": "Cannot remove more than what you have"}}, 400
 
-    # If you are trying to remove more than what you have
-    if len(cart_product) < amount:
-        return {"errors": {"message": "You can't delete more than what you have"}}, 400
+    if existing_cart.amount == amount:
+        db.session.delete(existing_cart)
 
-    # If you don't have the product
-    if not cart_product:
-        return {"errors": {"message": "You don't have this product"}}, 400
+    else:
+        existing_cart.amount -= amount
 
-    # Remove the product by the amount you specify
-    for _ in range(amount):
-        cart.products.remove(product)
     db.session.commit()
 
-    return {"message": f"Removed {amount} {product.name} from your cart"}
+    return {"message": f"Removed {amount} {product.name} to your cart"}
 
 
 @cart_routes.route("/remove/<int:product_id>/all", methods=["PUT"])

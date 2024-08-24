@@ -6,7 +6,7 @@ from .order import Order
 from .review import Review
 from .product import Product
 
-from .cart_product import cart_products as CartProducts
+from .cart_product import CartProduct
 from .list_product import list_products as ListProducts
 from .order_products import order_products as OrderProducts
 

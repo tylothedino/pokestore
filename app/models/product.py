@@ -1,7 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 from .order_products import order_products
-from .cart_product import cart_products
+
+# from .cart_product import cart_products
 from .list_product import list_products
 
 
@@ -33,7 +34,10 @@ class Product(db.Model):
     orders = db.relationship(
         "Order", secondary=order_products, back_populates="products"
     )
-    carts = db.relationship("Cart", secondary=cart_products, back_populates="products")
+
+    cart_products = db.relationship(
+        "CartProduct", backref="product", cascade="all, delete-orphan"
+    )
     list = db.relationship("List", secondary=list_products, back_populates="products")
 
     def to_dict(self):

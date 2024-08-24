@@ -1,4 +1,4 @@
-from app.models import db, Cart, environment, SCHEMA, Product
+from app.models import db, Cart, environment, SCHEMA, Product, CartProduct
 from sqlalchemy.sql import text
 
 
@@ -35,10 +35,13 @@ def seed_cart_products():
         {"cart_id": 3, "item_id": 7},
         {"cart_id": 3, "item_id": 8},
         {"cart_id": 3, "item_id": 9},
+        # {"cart_id": 3, "item_id": 9},
     ]:
         cart = Cart.query.get(item["cart_id"])
         product = Product.query.get(item["item_id"])
-        cart.products.append(product)
+
+        cartProduct = CartProduct(cart_id=cart.id, product_id=product.id, amount=3)
+        db.session.add(cartProduct)
     db.session.commit()
 
 
@@ -51,9 +54,9 @@ def seed_cart_products():
 def undo_cart_products():
     if environment == "production":
         db.session.execute(
-            f"TRUNCATE table {SCHEMA}.cart_products RESTART IDENTITY CASCADE;"
+            f"TRUNCATE table {SCHEMA}.cart_product RESTART IDENTITY CASCADE;"
         )
     else:
-        db.session.execute(text("DELETE FROM cart_products"))
+        db.session.execute(text("DELETE FROM cart_product"))
 
     db.session.commit()
