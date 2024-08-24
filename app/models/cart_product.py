@@ -1,28 +1,12 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-
-# cart_products = db.Table(
-#     "cart_products",
-#     db.Model.metadata,
-#     db.Column(
-#         "cart_id",
-#         db.Integer,
-#         db.ForeignKey(add_prefix_for_prod("carts.id"), ondelete="CASCADE"),
-#         nullable=False,
-#     ),
-#     db.Column(
-#         "product_id",
-#         db.Integer,
-#         db.ForeignKey(add_prefix_for_prod("products.id"), ondelete="CASCADE"),
-#         nullable=False,
-#     ),
-#     extend_existing=True,
-# )
-# if environment == "production":
-#     cart_products.schema = SCHEMA
+from .product import Product
 
 
 class CartProduct(db.Model):
     __tablename__ = "cart_product"
+
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
 
     cart_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("carts.id")), primary_key=True
@@ -33,4 +17,20 @@ class CartProduct(db.Model):
     amount = db.Column(db.Integer, nullable=False)
 
     def to_dict(self):
-        return {"cart": self.cart_id, "product": self.product_id, "amount": self.amount}
+        return {
+            "cart": self.cart_id,
+            "product": {
+                "id": self.product_id,
+                "name": Product.query.get(self.product_id).name,
+                "price": Product.query.get(self.product_id).price,
+                "category": Product.query.get(self.product_id).category,
+                "effect": Product.query.get(self.product_id).effect,
+                "description": Product.query.get(self.product_id).description,
+                "image": Product.query.get(self.product_id).image,
+                "reviews": [
+                    review.to_dict()
+                    for review in Product.query.get(self.product_id).reviews
+                ],
+            },
+            "amount": self.amount,
+        }

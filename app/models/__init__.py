@@ -8,6 +8,6 @@ from .product import Product
 
 from .cart_product import CartProduct
 from .list_product import list_products as ListProducts
-from .order_products import order_products as OrderProducts
+from .order_products import OrderProduct
 
 from .db import environment, SCHEMA

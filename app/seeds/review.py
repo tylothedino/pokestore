@@ -9,7 +9,6 @@ def seed_review():
         name="This product is awesome!",
         description="This pokeball is crazy broken, I can catch whatever I want!",
         product_id=1,
-        image="https://tagn.wordpress.com/wp-content/uploads/2023/06/pokemongomasterball-1.png",
         rating=5,
     )
     db.session.add(demo)

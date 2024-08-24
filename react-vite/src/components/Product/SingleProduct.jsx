@@ -24,7 +24,7 @@ const SingleProduct = () => {
     const [product_amount, set_amount] = useState(1);
 
     // console.log(current_product)
-    console.log(user)
+    // console.log(user)
     // console.log(product_review)
 
 

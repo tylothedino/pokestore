@@ -42,7 +42,6 @@ def new_review(product_id):
     review = Review(
         name=body["name"],
         description=body["description"],
-        image=body["image"],
         user_id=current_user.id,
         product_id=product_id,
     )
@@ -70,9 +69,6 @@ def edit_review(id):
 
     if body["description"] is not None:
         review.description = body["description"]
-
-    if body["image"] is not None:
-        review.image = body["image"]
 
     db.session.commit()
     return {"message": "Updated review"}

@@ -1,4 +1,4 @@
-from app.models import db, Order, environment, SCHEMA, Product
+from app.models import db, Order, environment, SCHEMA, Product, OrderProduct
 from sqlalchemy.sql import text
 from datetime import datetime, timedelta
 import random
@@ -55,17 +55,21 @@ def seed_orders():
         {"order_id": 1, "item_id": 210},
         {"order_id": 1, "item_id": 103},
         {"order_id": 1, "item_id": 1},
-        {"order_id": 2, "item_id": 2},
         {"order_id": 2, "item_id": 23},
         {"order_id": 2, "item_id": 2},
         {"order_id": 3, "item_id": 22},
         {"order_id": 3, "item_id": 33},
         {"order_id": 3, "item_id": 44},
     ]:
-        user_order = Order.query.get(item["order_id"])
-        product = Product.query.get(item["item_id"])
-        user_order.products.append(product)
-    db.session.commit()
+        # user_order = Order.query.get(item["order_id"])
+        # product = Product.query.get(item["item_id"])
+
+        orderProduct = OrderProduct(
+            order_id=item["order_id"], product_id=item["item_id"], amount=3
+        )
+
+        db.session.add(orderProduct)
+        db.session.commit()
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
@@ -77,6 +81,7 @@ def seed_orders():
 def undo_orders():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.orders RESTART IDENTITY CASCADE;")
+
     else:
         db.session.execute(text("DELETE FROM orders"))
 

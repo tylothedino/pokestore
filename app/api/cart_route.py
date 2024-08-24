@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Cart, db, Order, Product, CartProduct
+from app.models import Cart, db, Order, Product, CartProduct, OrderProduct
 import re
 
 cart_routes = Blueprint("carts", __name__)
@@ -82,19 +82,35 @@ def purchase():
     # Grab the user's cart
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
     # Get the total sum of all the products in the cart
-    total = sum(product.price for product in cart.products)
+    print("aawdawdawdawdawdawd", cart.to_dict()["products"])
+
+    products = cart.to_dict()["products"]
+
+    total = 0
+
+    for x in products:
+        total += x["product"]["price"] * x["amount"]
 
     # Create an order with the status of - PENDING
     order = Order(
-        status="pending", total_cost=total, delivery_date=None, user_id=current_user.id
+        status="Pending", total_cost=total, delivery_date=None, user_id=current_user.id
     )
 
     db.session.add(order)
     db.session.commit()
 
     # Add the products from the cart to the order
-    for product in cart.products:
-        order.append(product)
+    for product in products:
+        add_products = OrderProduct(
+            order_id=order.id,
+            product_id=product["product"]["id"],
+            amount=product["amount"],
+        )
+        db.session.add(add_products)
+
+    db.session.commit()
+
+    cart.cart_products = []
 
     db.session.commit()
 

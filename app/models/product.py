@@ -1,6 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
-from .order_products import order_products
 
 # from .cart_product import cart_products
 from .list_product import list_products
@@ -31,8 +30,8 @@ class Product(db.Model):
     reviews = db.relationship(
         "Review", back_populates="product", cascade="all, delete-orphan"
     )
-    orders = db.relationship(
-        "Order", secondary=order_products, back_populates="products"
+    order_products = db.relationship(
+        "OrderProduct", backref="product_associated", cascade="all, delete-orphan"
     )
 
     cart_products = db.relationship(
