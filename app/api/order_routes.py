@@ -52,7 +52,7 @@ def update_order(id):
     return {"order": order.to_dict()}
 
 
-@order_routes.route("/<int:id>", methods=["DELETE"])
+@order_routes.route("/<int:id>/cancel", methods=["DELETE"])
 @login_required
 def cancel_order(id):
     order = Order.query.get(id)

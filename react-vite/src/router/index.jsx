@@ -8,12 +8,16 @@ import Cart from '../components/Cart/cart';
 
 import { allProductsLoader } from '../components/Loaders/product';
 import { cartLoader } from '../components/Loaders/cart';
+import { allOrderLoader } from '../components/Loaders/order';
 
 
 import { productActions } from '../components/Actions/products';
 import { cartActions } from '../components/Actions/cart';
 
 import Layout from './Layout';
+import SingleOrder from '../components/Order/single_order';
+import Orders from '../components/Order/order';
+import { orderActions } from '../components/Actions/order';
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +46,17 @@ export const router = createBrowserRouter([
         element: <Cart />,
         action: cartActions,
         loader: cartLoader
+      },
+      {
+        path: "/order/:id",
+        element: <SingleOrder />,
+        loader: allOrderLoader,
+        action: orderActions
+
+      },
+      {
+        path: "/order",
+        element: <Orders />,
       }
     ],
   },
