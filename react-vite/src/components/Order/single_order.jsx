@@ -55,9 +55,10 @@ const SingleOrder = () => {
             {
                 current_order.status != 'Cancelled' && current_order.status != 'Returned' ?
 
-                    <Form method='delete' action={`/order/${current_order.id}`} >
+                    <Form method='delete' action={`/order/${id}`} >
                         <button type="submit" name="intent" value='cancel-order'>Cancel Order</button>
                         <input type='hidden' value={current_order.id} name="order_id" />
+                        <input type='hidden' value={id} name="order_index" />
                     </Form>
 
                     : ""

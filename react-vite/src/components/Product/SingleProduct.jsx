@@ -22,6 +22,7 @@ const SingleProduct = () => {
 
 
     const [product_amount, set_amount] = useState(1);
+    const [purchased, setPurchased] = useState(false);
 
     // console.log(current_product)
     // console.log(user)
@@ -64,9 +65,14 @@ const SingleProduct = () => {
                         type="submit"
                         name='intent'
                         value='add-product-to-cart'
+                        onClick={(e) => { e.stopPropagation(); setPurchased(true); }}
                     >Add to Cart</button>
 
                 </Form>
+
+                {
+                    purchased ? <p>Added product to cart</p> : ""
+                }
 
             </div>
 

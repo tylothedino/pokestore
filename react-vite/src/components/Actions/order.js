@@ -18,7 +18,7 @@ export const orderActions = async ({ request }) => {
         if (response.ok) {
             const message = await response.json();
             console.log(message)
-            return redirect(`/order/${data.order_id}`)
+            return redirect(`/order/${data.order_index}`)
         }
 
     }

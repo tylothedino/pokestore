@@ -17,7 +17,8 @@ def all_cart():
 @login_required
 def clear_cart():
     cart = Cart.query.filter(Cart.user_id == current_user.id).first()
-    cart.products = []
+    cart.cart_products = []
+    print("CLEARED CART")
     db.session.commit()
 
     return {"message": "Cleared your cart"}

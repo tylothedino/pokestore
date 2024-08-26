@@ -20,8 +20,6 @@ const Cart = () => {
     }, [cart])
 
 
-
-
     const handleAmountChange = (productId, newAmount) => {
         setAmounts(prevAmounts => ({
             ...prevAmounts,
@@ -73,15 +71,25 @@ const Cart = () => {
             </div>
 
             <h3>Total price: {total_price}</h3>
-
             <div>
-                <Form method="post" action={`/cart`}>
+                <Form method="delete" action={`/cart`}>
                     <button
                         type="submit"
                         name='intent'
-                        value='purchase-product'
-                    >Purchase</button>
+                        value='clear-cart'
+                    >Clear Cart</button>
                 </Form>
+            </div>
+            <div>
+                {
+                    cart.products.length > 0 ? <Form method="post" action={`/cart`}>
+                        <button
+                            type="submit"
+                            name='intent'
+                            value='purchase-product'
+                        >Purchase</button>
+                    </Form> : ""
+                }
             </div>
         </div>
     )

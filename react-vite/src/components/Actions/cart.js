@@ -37,6 +37,21 @@ export const cartActions = async ({ request }) => {
 
     }
 
+    if (intent === 'clear-cart') {
+        const response = await fetch(`/api/cart/clear`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+
+        })
+
+        if (response.ok) {
+            const message = await response.json();
+            return message
+        }
+    }
+
     return "None"
 
 }

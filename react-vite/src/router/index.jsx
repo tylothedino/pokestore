@@ -6,7 +6,7 @@ import SingleProduct from '../components/Product/SingleProduct';
 import Cart from '../components/Cart/cart';
 
 
-import { allProductsLoader } from '../components/Loaders/product';
+import { allProductsLoader, categoryProductLoader } from '../components/Loaders/product';
 import { cartLoader } from '../components/Loaders/cart';
 import { allOrderLoader } from '../components/Loaders/order';
 
@@ -18,6 +18,7 @@ import Layout from './Layout';
 import SingleOrder from '../components/Order/single_order';
 import Orders from '../components/Order/order';
 import { orderActions } from '../components/Actions/order';
+import CategoryProduct from '../components/Product/CategoryProduct';
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,11 @@ export const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignupFormPage />,
+      },
+      {
+        path: "/product/category/:category",
+        element: <CategoryProduct />,
+        loader: categoryProductLoader,
       },
       {
         path: "/product/:product_num",
