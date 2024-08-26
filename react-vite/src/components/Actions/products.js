@@ -70,6 +70,25 @@ export const productActions = async ({ request }) => {
 
     }
 
+    if (intent === 'add-product-to-list') {
+        const response = await fetch(`/api/lists/add/${data.list}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                product_id: data.product_id
+            })
+        })
+
+        if (response.ok) {
+            const listAdd = await response.json();
+            // console.log(listAdd)
+            return listAdd
+        }
+
+    }
+
 
     return "FALSE"
 

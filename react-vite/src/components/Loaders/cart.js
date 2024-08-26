@@ -8,7 +8,7 @@ const store = configureStore();
 
 export const cartLoader = async () => {
     const response = await fetch('/api/cart/')
-
+    
     if (response.ok) {
         const cart = await response.json();
 

@@ -55,6 +55,7 @@ class User(db.Model, UserMixin):
             "products": [product.to_dict() for product in self.products],
             "orders": [order.to_dict() for order in self.orders],
             "cart": self.cart[0].to_dict(),
+            "lists": [list.to_dict() for list in self.lists],
         }
 
     def to_dict_review(self):

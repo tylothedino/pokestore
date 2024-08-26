@@ -67,6 +67,8 @@ export const router = createBrowserRouter([
       {
         path: "/order",
         element: <Orders />,
+        loader: allOrderLoader,
+        action: orderActions
       },
       {
         path: "/list",

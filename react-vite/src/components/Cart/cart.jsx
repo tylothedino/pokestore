@@ -1,4 +1,4 @@
-import { Form, useLoaderData, useParams } from "react-router-dom";
+import { Form, useLoaderData, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
 
@@ -10,6 +10,15 @@ const Cart = () => {
     const [amounts, setAmounts] = useState({});
 
     const cart = useLoaderData().cart.cart
+    const nav = useNavigate();
+
+    if (!user) {
+        return (
+            <>
+                <h2>401 Unauthorized</h2>
+            </>
+        )
+    }
 
     useEffect(() => {
         let total = 0
@@ -18,6 +27,7 @@ const Cart = () => {
         })
         setTotalPrice(total)
     }, [cart])
+
 
 
     const handleAmountChange = (productId, newAmount) => {
@@ -82,13 +92,15 @@ const Cart = () => {
             </div>
             <div>
                 {
-                    cart.products.length > 0 ? <Form method="post" action={`/cart`}>
-                        <button
-                            type="submit"
-                            name='intent'
-                            value='purchase-product'
-                        >Purchase</button>
-                    </Form> : ""
+                    cart.products.length > 0 ?
+                        <Form method="post" action={`/cart`}>
+                            <button
+                                type="submit"
+                                name='intent'
+                                value='purchase-product'
+                            >Purchase</button>
+                            <input type="hidden" value={user.orders.length} name="order_index" />
+                        </Form> : ""
                 }
             </div>
         </div>

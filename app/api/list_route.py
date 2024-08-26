@@ -40,13 +40,12 @@ def add_to_list(id):
     if product is None or product_list is None:
         return {"errors": {"message": "Not Found"}}, 404
 
-    if product_list.products in product:
-        return {"message": "This product is already in this list"}
+    if product in product_list.products:
+        return {"messages": "This product is already in this list"}
 
     product_list.products.append(product)
     db.session.commit()
-
-    return {"message": f"Added {product.name} to {product_list.name}"}
+    return {"messages": f"Added {product.name} to {product_list.name}"}
 
 
 @list_routes.route("/remove-from-list/<int:id>", methods=["PUT"])

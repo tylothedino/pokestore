@@ -1,14 +1,23 @@
 import { Form, useLoaderData, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useModal } from "../../context/Modal";
 import CreateList from "./Modal/CreateListModal";
 const List = () => {
     const { lists } = useLoaderData();
     const nav = useNavigate();
     const { setModalContent, closeModal } = useModal();
-
+    const user = useSelector((state) => state.session.user);
     const ulRef = useRef();
+
+    if (!user) {
+        return (
+            <>
+                <h2>401 Unauthorized</h2>
+            </>
+        )
+    }
+
 
     const handleCreateList = () => {
         setModalContent(
