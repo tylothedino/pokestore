@@ -63,7 +63,7 @@ def remove_from_list(id):
     if product is None or product_list is None:
         return {"errors": {"message": "Not Found"}}, 404
 
-    if product_list.products not in product:
+    if product not in product_list.products:
         return {"message": "This product is not in this list"}
 
     product_list.products.remove(product)

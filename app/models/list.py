@@ -27,6 +27,6 @@ class List(db.Model):
         return {
             "name": self.name,
             "id": self.id,
-            "products": self.products,
+            "products": [product.to_dict() for product in self.products],
             "updated_at": self.updated_at,
         }

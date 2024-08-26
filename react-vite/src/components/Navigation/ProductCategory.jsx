@@ -65,7 +65,9 @@ function ProductCategoryDrop() {
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
 
-
+    useEffect(() => {
+        setShowMenu(false)
+    }, [navigate])
 
     return (
         <div>

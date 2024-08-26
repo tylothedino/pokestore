@@ -19,6 +19,10 @@ import SingleOrder from '../components/Order/single_order';
 import Orders from '../components/Order/order';
 import { orderActions } from '../components/Actions/order';
 import CategoryProduct from '../components/Product/CategoryProduct';
+import List from '../components/List/List';
+import { allListLoader } from '../components/Loaders/list';
+import SingleList from '../components/List/SingleList';
+import { listActions } from '../components/Actions/list';
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +67,18 @@ export const router = createBrowserRouter([
       {
         path: "/order",
         element: <Orders />,
+      },
+      {
+        path: "/list",
+        element: <List />,
+        loader: allListLoader,
+        action: listActions
+      },
+      {
+        path: "/list/:id",
+        element: <SingleList />,
+        loader: allListLoader,
+        action: listActions
       }
     ],
   },
