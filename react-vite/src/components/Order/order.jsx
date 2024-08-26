@@ -1,16 +1,31 @@
 import { Form, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from 'react-redux';
-
+import CreateReview from "../Review/Modal/ReviewModal";
+import { useModal } from "../../context/Modal";
 
 const Orders = () => {
     const user = useSelector((state) => state.session.user);
     const { orders } = useLoaderData();
     const nav = useNavigate();
-
+    const { setModalContent, closeModal } = useModal();
     if (!user) {
         return (
             <h2>401 Unauthorized</h2>
 
+        )
+    }
+
+    const handleCreateReview = (product_id, order_id) => {
+        setModalContent(
+            <div className="modal-container">
+                <CreateReview
+                    onClose={closeModal}
+                    className="modal-container"
+                    product_id={product_id}
+                    user_id={user.id}
+                    order_id={order_id}
+                />
+            </div>
         )
     }
 
@@ -34,6 +49,8 @@ const Orders = () => {
                                         <p>{product.product.name}</p>
                                         <p>Amount: {product.amount}</p>
                                         <button onClick={(e) => { e.stopPropagation(); nav(`/product/${product.product.id}`) }}>View Product</button>
+
+                                        <button type="submit" onClick={(e) => { e.stopPropagation(); handleCreateReview(product.product.id, order.id); }}>Add Review</button>
                                     </div>
                                 ))
                             }

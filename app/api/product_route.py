@@ -175,29 +175,17 @@ def add_review(id):
     if product is None:
         return {"errors": {"message": "Not Found"}}, 404
 
-    has_ordered = False
+    review = Review(
+        name=body["name"],
+        description=body["description"],
+        rating=body["rating"],
+        user_id=current_user.id,
+        product_id=id,
+    )
+    db.session.add(review)
+    db.session.commit()
 
-    for order in current_user.orders:
-        if product in order.products:
-            print("HAS ORDERED")
-            has_ordered = True
-            break
-    if has_ordered:
-        review = Review(
-            name=body["name"],
-            description=body["description"],
-            image=body["image"],
-            rating=body["rating"],
-            user_id=current_user.id,
-            product_id=id,
-        )
-        db.session.add(review)
-        db.session.commit()
-
-        return {"review": review.to_dict()}
-    else:
-        print("DID NOT ORDER")
-        return {"errors": {"message": "You have not bought this"}}, 401
+    return {"review": review.to_dict()}
 
 
 @product_routes.route("/<int:id>/add_to_cart", methods=["PUT"])

@@ -1,11 +1,9 @@
 import { Form, useActionData, useLoaderData, useParams } from "react-router-dom";
 import { useSelector } from 'react-redux';
-
-import { productActions } from "../Actions/products";
-import { allProductsLoader } from "../Loaders/product";
+import CreateReviewProduct from "../Review/Modal/ReviewModal";
 import { useEffect, useState } from "react";
 
-
+import { useModal } from "../../context/Modal";
 
 const SingleProduct = () => {
     const { products } = useLoaderData();
@@ -29,6 +27,8 @@ const SingleProduct = () => {
     const [actionResponse, setActionResponse] = useState("")
     const [actionResponses, setActionResponses] = useState("")
 
+    const { setModalContent, closeModal } = useModal();
+
     useEffect(() => {
         setActionResponse(action?.messages)
     }, [action?.messages])
@@ -42,6 +42,18 @@ const SingleProduct = () => {
     // console.log(user)
     // console.log(product_review)
 
+    const handleCreateReview = () => {
+        setModalContent(
+            <div className="modal-container">
+                <CreateReviewProduct
+                    onClose={closeModal}
+                    className="modal-container"
+                    product_id={product_num}
+                    user_id={user.id}
+                />
+            </div>
+        )
+    }
 
     return (
         <div>
@@ -113,6 +125,8 @@ const SingleProduct = () => {
 
 
             <div>
+
+                <button type="submit" onClick={(e) => { e.stopPropagation(); handleCreateReview(); }}>Add Review</button>
                 {
 
                     product_review.map((review) => (

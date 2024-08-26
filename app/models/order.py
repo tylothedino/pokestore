@@ -33,3 +33,8 @@ class Order(db.Model):
             "created_at": self.created_at,
             "products": [product.to_dict() for product in self.order_products],
         }
+
+    def get_product(self):
+        return {
+            "products": [product.to_dict() for product in self.order_products],
+        }

@@ -28,27 +28,27 @@ def get_product_review(product_id):
     return {"reviews": [review.to_dict() for review in reviews]}
 
 
-@review_routes.route("/product/<int:product_id>/new", methods=["POST"])
-@login_required
-def new_review(product_id):
+# @review_routes.route("/product/<int:product_id>/new", methods=["POST"])
+# @login_required
+# def new_review(product_id):
 
-    body = request.get_json()
+#     body = request.get_json()
 
-    product = Product.query.get(product_id)
+#     product = Product.query.get(product_id)
 
-    if product is None:
-        return {"errors": {"message": "Not Found"}}, 404
+#     if product is None:
+#         return {"errors": {"message": "Not Found"}}, 404
 
-    review = Review(
-        name=body["name"],
-        description=body["description"],
-        user_id=current_user.id,
-        product_id=product_id,
-    )
+#     review = Review(
+#         name=body["name"],
+#         description=body["description"],
+#         user_id=current_user.id,
+#         product_id=product_id,
+#     )
 
-    db.session.add(review)
-    db.session.commit()
-    return {"review": review.to_dict()}
+#     db.session.add(review)
+#     db.session.commit()
+#     return {"review": review.to_dict()}
 
 
 @review_routes.route("/<int:id>/edit", methods=["PUT"])
