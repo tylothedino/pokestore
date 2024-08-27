@@ -24,8 +24,8 @@ const CreateReview = ({ onClose, product_id, user_id }) => {
                 <input required type='text' name="description" value={description} onChange={(e) => setDescription(e.target.value)} />
 
 
-                <p>Rating:</p>
-                <input required max="5" min="0" type='number' name="rating" value={rating} onChange={(e) => setRating(e.target.value)} />
+                <p>Rating: {rating}</p>
+                <input required max="5" min="0" type='range' name="rating" value={rating} onChange={(e) => setRating(e.target.value)} />
 
                 <input type="hidden" value={user_id} name="user_id" />
                 <input type="hidden" value={product_id} name="product_id" />

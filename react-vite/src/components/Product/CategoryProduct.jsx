@@ -20,9 +20,9 @@ const CategoryProduct = () => {
                         <p>{product.price}</p>
                         {
                             product.reviews.length > 0 &&
-                            <p>{product.reviews.reduce((accum, review) => (
+                            <p>{(product.reviews.reduce((accum, review) => (
                                 accum + review.rating
-                            ), 0) / product.reviews.length}</p>
+                            ), 0) / product.reviews.length).toFixed(1)}</p>
 
                         }
                     </div>
