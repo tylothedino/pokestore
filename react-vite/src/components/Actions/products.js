@@ -1,5 +1,3 @@
-import { redirect } from "react-router-dom";
-
 
 export const productActions = async ({ request }) => {
     let formData = await request.formData();

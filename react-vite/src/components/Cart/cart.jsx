@@ -1,4 +1,4 @@
-import { Form, useLoaderData, useNavigate } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
 
@@ -10,7 +10,14 @@ const Cart = () => {
     const [amounts, setAmounts] = useState({});
 
     const cart = useLoaderData().cart.cart
-    const nav = useNavigate();
+
+    useEffect(() => {
+        let total = 0
+        cart?.products?.map((product) => {
+            total += (product.product.price * product.amount)
+        })
+        setTotalPrice(total)
+    }, [cart])
 
     if (!user) {
         return (
@@ -20,13 +27,6 @@ const Cart = () => {
         )
     }
 
-    useEffect(() => {
-        let total = 0
-        cart.products.map((product) => {
-            total += (product.product.price * product.amount)
-        })
-        setTotalPrice(total)
-    }, [cart])
 
 
 
@@ -53,7 +53,7 @@ const Cart = () => {
         <div>
             <div>
                 {
-                    cart.products.map((product) => (
+                    cart?.products?.map((product) => (
                         <div key={`product_cart_${product.product.id}`}>
                             <h4>{product.amount}</h4>
                             <p>{product.product.name}</p>
@@ -92,7 +92,7 @@ const Cart = () => {
             </div>
             <div>
                 {
-                    cart.products.length > 0 ?
+                    cart?.products?.length > 0 ?
                         <Form method="post" action={`/cart`}>
                             <button
                                 type="submit"
