@@ -75,7 +75,7 @@ function ProductCategoryDrop() {
                 Categories
             </button>
 
-            <div ref={ulRef}>
+            <div ref={ulRef} className={"profile-dropdown"}>
                 {
                     showMenu && existing_categories.map((category) => (
                         <div key={category}>

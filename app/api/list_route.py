@@ -26,6 +26,24 @@ def create_list():
     return {"list": new_list.to_dict()}
 
 
+@list_routes.route("/edit/<int:id>", methods=["PUT"])
+@login_required
+def edit_list(id):
+    body = request.get_json()
+    find_list = List.query.get(id)
+
+    if find_list.user_id != current_user.id:
+        return {"errors": {"message": "Unauthorized"}}, 401
+
+    if find_list is None:
+        return {"errors": {"message": "Not Found"}}, 404
+
+    find_list.name = body["name"]
+
+    db.session.commit()
+    return {"message": "Submitted edit"}
+
+
 @list_routes.route("/add/<int:id>", methods=["PUT"])
 @login_required
 def add_to_list(id):

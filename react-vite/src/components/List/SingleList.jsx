@@ -1,18 +1,56 @@
 import { Form, useLoaderData, useParams } from "react-router-dom";
-import { useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
 
+import { useNavigate } from "react-router-dom";
+import EditList from "./Modal/EditListModal";
+import { useModal } from "../../context/Modal";
+import { useRef } from "react";
+import DeleteList from "./Modal/DeleteListModal";
 
 const SingleList = () => {
     const { lists } = useLoaderData();
     const { id } = useParams();
     const nav = useNavigate();
-
+    const { setModalContent, closeModal } = useModal();
     const currentList = lists.lists[id - 1]
+    const ulRef = useRef();
+
+    const handleEditList = (list_name, list_id) => {
+        setModalContent(
+            <div className="modal-container">
+                <EditList
+                    onClose={closeModal}
+                    className="modal-container"
+                    list_name={list_name}
+                    list_id={list_id}
+                    link={id}
+                />
+            </div>
+        )
+    }
+
+
+    const handleDeleteList = (list_id) => {
+        setModalContent(
+            <div className="modal-container">
+                <DeleteList
+                    onClose={closeModal}
+                    className="modal-container"
+                    list_id={list_id}
+                    link={''}
+                />
+            </div>
+        )
+    }
+
 
     return (
         <div>
             <h2>{currentList.name}</h2>
+            <div ref={ulRef}>
+                <button type="submit" onClick={(e) => { e.stopPropagation(); handleEditList(currentList.name, currentList.id); }}>Edit List</button>
+                <button type="submit" onClick={(e) => { e.stopPropagation(); handleDeleteList(currentList.id); }}>Delete List</button>
+
+            </div>
             {
                 currentList.products.map((product) => (
                     <div key={product.name} onClick={(e) => { e.stopPropagation(); nav(`/product/${product.id}`) }}>
