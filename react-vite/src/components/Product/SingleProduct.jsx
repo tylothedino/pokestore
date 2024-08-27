@@ -100,30 +100,32 @@ const SingleProduct = () => {
 
 
             <div>
-                <Form method='put' action={`/product/${product_num}`} >
-                    <select name="amount" id="product_amount" value={product_amount} onChange={(e) => set_amount(+e.target.value)}>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                    <input type='hidden' value={product_num} name="product_id" />
-                    <button
-                        type="submit"
-                        name='intent'
-                        value='add-product-to-cart'
-                    >Add to Cart</button>
-                    {
-                        actionResponses ? <p>{actionResponses}</p> : ""
-                    }
-                </Form>
-
+                {
+                    user ? <Form method='put' action={`/product/${product_num}`} >
+                        <select name="amount" id="product_amount" value={product_amount} onChange={(e) => set_amount(+e.target.value)}>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <input type='hidden' value={product_num} name="product_id" />
+                        <button
+                            type="submit"
+                            name='intent'
+                            value='add-product-to-cart'
+                        >Add to Cart</button>
+                        {
+                            actionResponses ? <p>{actionResponses}</p> : ""
+                        }
+                    </Form>
+                        : ""
+                }
                 {
                     user ? <Form method='put' action={`/product/${product_num}`} >
                         <select name="list" id="list" value={list} onChange={(e) => setList(e.target.value)}>
@@ -156,7 +158,9 @@ const SingleProduct = () => {
 
             <div>
 
-                <button type="submit" onClick={(e) => { e.stopPropagation(); handleCreateReview(); }}>Add Review</button>
+                {
+                    user ? <button type="submit" onClick={(e) => { e.stopPropagation(); handleCreateReview(); }}>Add Review</button> : ""
+                }
                 {
 
                     product_review.map((review) => (
