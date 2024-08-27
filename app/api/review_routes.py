@@ -28,36 +28,14 @@ def get_product_review(product_id):
     return {"reviews": [review.to_dict() for review in reviews]}
 
 
-# @review_routes.route("/product/<int:product_id>/new", methods=["POST"])
-# @login_required
-# def new_review(product_id):
-
-#     body = request.get_json()
-
-#     product = Product.query.get(product_id)
-
-#     if product is None:
-#         return {"errors": {"message": "Not Found"}}, 404
-
-#     review = Review(
-#         name=body["name"],
-#         description=body["description"],
-#         user_id=current_user.id,
-#         product_id=product_id,
-#     )
-
-#     db.session.add(review)
-#     db.session.commit()
-#     return {"review": review.to_dict()}
-
-
 @review_routes.route("/<int:id>/edit", methods=["PUT"])
 @login_required
 def edit_review(id):
     body = request.get_json()
-
+    print("HERE IS THE BODY__________________")
+    print(body)
     review = Review.query.get(id)
-
+    print("MY REVIEW", review)
     if review is None:
         return {"errors": {"message": "Not Found"}}, 404
 
@@ -69,6 +47,9 @@ def edit_review(id):
 
     if body["description"] is not None:
         review.description = body["description"]
+
+    if body["rating"] is not None:
+        review.rating = body["rating"]
 
     db.session.commit()
     return {"message": "Updated review"}

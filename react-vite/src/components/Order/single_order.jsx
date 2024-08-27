@@ -8,8 +8,6 @@ const SingleOrder = () => {
     const { id } = useParams();
 
     const user = useSelector((state) => state.session.user);
-    const current_order = orders.orders[id - 1]
-
 
     if (!user) {
         return (
@@ -17,6 +15,7 @@ const SingleOrder = () => {
 
         )
     }
+    const current_order = orders.orders[id - 1]
 
     if (!current_order) {
         return (

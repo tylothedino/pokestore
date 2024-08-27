@@ -4,6 +4,8 @@ import CreateReviewProduct from "../Review/Modal/ReviewModal";
 import { useEffect, useState } from "react";
 
 import { useModal } from "../../context/Modal";
+import EditReviewProduct from "../Review/Modal/EditReviewModal";
+import DeleteReviewProduct from "../Review/Modal/DeleteReviewModal";
 
 const SingleProduct = () => {
     const { products } = useLoaderData();
@@ -50,6 +52,34 @@ const SingleProduct = () => {
                     className="modal-container"
                     product_id={product_num}
                     user_id={user.id}
+                />
+            </div>
+        )
+    }
+
+    const handleEditReview = (review) => {
+        setModalContent(
+            <div className="modal-container">
+                <EditReviewProduct
+                    onClose={closeModal}
+                    className="modal-container"
+                    product_id={product_num}
+                    user_id={user.id}
+                    review={review}
+                />
+            </div>
+        )
+    }
+
+    const handleDeleteReview = (review) => {
+        setModalContent(
+            <div className="modal-container">
+                <DeleteReviewProduct
+                    onClose={closeModal}
+                    className="modal-container"
+                    product_id={product_num}
+                    user_id={user.id}
+                    review={review}
                 />
             </div>
         )
@@ -137,6 +167,14 @@ const SingleProduct = () => {
                             <p>{review.description}</p>
                             <p>{review.rating}</p>
                             <img src={review.image} />
+                            {
+                                review.owner.id === user?.id ?
+                                    <div>
+                                        <button type="submit" onClick={(e) => { e.stopPropagation(); handleEditReview(review); }}>Edit Review</button>
+                                        <button type="submit" onClick={(e) => { e.stopPropagation(); handleDeleteReview(review); }}>Delete Review</button>
+                                    </div>
+                                    : ""
+                            }
                         </div>
 
                     ))

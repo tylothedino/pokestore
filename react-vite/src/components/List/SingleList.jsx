@@ -5,14 +5,23 @@ import EditList from "./Modal/EditListModal";
 import { useModal } from "../../context/Modal";
 import { useRef } from "react";
 import DeleteList from "./Modal/DeleteListModal";
+import { useSelector } from "react-redux";
 
 const SingleList = () => {
     const { lists } = useLoaderData();
     const { id } = useParams();
     const nav = useNavigate();
     const { setModalContent, closeModal } = useModal();
-    const currentList = lists.lists[id - 1]
     const ulRef = useRef();
+    const user = useSelector((state) => state.session.user);
+
+    if (!user) {
+        return (
+            <h2>401 Unauthorized</h2>
+
+        )
+    }
+    const currentList = lists.lists[id - 1]
 
     const handleEditList = (list_name, list_id) => {
         setModalContent(

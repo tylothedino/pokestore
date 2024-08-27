@@ -39,7 +39,6 @@ export const productActions = async ({ request }) => {
             body: JSON.stringify({
                 name: data.review_name,
                 description: data.description,
-                image: data.image,
                 rating: data.rating,
             })
         })
@@ -51,6 +50,45 @@ export const productActions = async ({ request }) => {
 
 
     }
+
+    if (intent === 'edit-review') {
+        const response = await fetch(`/api/reviews/${data.review_id}/edit`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: data.name,
+                description: data.description,
+                rating: data.rating,
+            })
+        })
+
+        if (response.ok) {
+            const message = await response.json();
+            return message;
+        }
+
+
+    }
+
+    if (intent === 'delete-review') {
+        const response = await fetch(`/api/reviews/${data.review_id}/delete`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+
+        if (response.ok) {
+            const message = await response.json();
+            console.log(message);
+            return message;
+        }
+
+
+    }
+
 
     if (intent === 'add-product-to-cart') {
         const response = await fetch(`/api/products/${data.product_id}/add_to_cart`, {
