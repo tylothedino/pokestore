@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { thunkSignup } from "../../redux/session";
-import { thunkAuthenticate } from "../../redux/session";
+import { useModal } from "../../context/Modal";
 import "./SignupForm.css";
 
 function SignupFormModal() {
@@ -20,6 +20,9 @@ function SignupFormModal() {
   const [zipcode, setZip] = useState('');
 
   const [errors, setErrors] = useState({});
+
+  const { closeModal } = useModal();
+  const nav = useNavigate();
 
   if (sessionUser) return <Navigate to="/" replace={true} />;
 
@@ -57,13 +60,11 @@ function SignupFormModal() {
       error.confirmPassword = "Confirm Password field must be the same as the Password field"
     }
     if (isNaN(Number(zip))) {
-      console.log("BAD ZIp")
       error.zipcode = "Invalid Zip code"
     }
 
 
     if (Object.keys(error).length > 0) {
-      console.log("EERR", error)
       return setErrors(error);
     }
 
@@ -116,7 +117,8 @@ function SignupFormModal() {
 
       return setErrors(error);
     } else {
-      navigate("/");
+      closeModal();
+      nav('/')
     }
 
 

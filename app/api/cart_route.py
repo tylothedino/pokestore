@@ -106,6 +106,9 @@ def purchase():
             order_id=order.id,
             product_id=product["product"]["id"],
             amount=product["amount"],
+            delivery_address=(
+                f"{current_user.address}, {current_user.city}, {current_user.state} {current_user.zip}"
+            ),
         )
         db.session.add(add_products)
 

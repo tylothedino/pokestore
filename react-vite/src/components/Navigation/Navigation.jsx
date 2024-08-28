@@ -22,7 +22,7 @@ function Navigation() {
           </div>
 
           <div>
-            {user ? <NavLink to='/cart'>Cart</NavLink> : ""}
+            {user ? <img className="profile-icon" src="https://cdn-icons-png.flaticon.com/512/4564/4564300.png" onClick={(e) => { e.stopPropagation(); nav('/cart') }} /> : ""}
           </div>
         </div>
       </div>

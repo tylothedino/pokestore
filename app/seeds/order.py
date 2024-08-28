@@ -32,18 +32,21 @@ def seed_orders():
         status="Delivered",
         delivery_date=generate_random_datetime(2020, 2024),
         total_cost=200000,
+        delivery_address="HERE",
     )
     marnie = Order(
         user_id=2,
         status="Cancelled",
         delivery_date=None,
         total_cost=3000,
+        delivery_address="HOME",
     )
     bobbie = Order(
         user_id=3,
         status="Returned",
         delivery_date=None,
         total_cost=200000,
+        delivery_address="NOWHERE",
     )
 
     db.session.add(demo)

@@ -13,12 +13,12 @@ function ProfileButton() {
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
-
+  const url = window.location.href;
   const nav = useNavigate();
 
   useEffect(() => {
     setShowMenu(false)
-  }, [nav])
+  }, [nav, url])
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -51,24 +51,22 @@ function ProfileButton() {
 
   return (
     <>
-      <button onClick={toggleMenu}>
-        <FaUserCircle />
-      </button>
+      <img onClick={toggleMenu} className="profile-icon" src="https://cdn2.iconfinder.com/data/icons/pokemon-go-16/614/8349_-_Psyduck-1024.png" />
       {showMenu && (
-        <ul className={"profile-dropdown"} ref={ulRef}>
+        <div className={"profile-dropdown"} ref={ulRef} onMouseLeave={toggleMenu}>
           {user ? (
             <>
-              <li>{user.username}</li>
-              <li>{user.email}</li>
-              <li>
-                <button onClick={logout}>Log Out</button>
-              </li>
-              <li>
+              <p>{user.username}</p>
+              <p>{user.email}</p>
+              <div>
                 <button onClick={(e) => { e.stopPropagation; closeMenu(); nav('/list') }}>My lists</button>
-              </li>
-              <li>
+              </div>
+              <div>
                 <button onClick={(e) => { e.stopPropagation; closeMenu(); nav('/order') }}>Orders</button>
-              </li>
+              </div>
+              <div>
+                <button onClick={logout}>Log Out</button>
+              </div>
             </>
           ) : (
             <>
@@ -84,8 +82,9 @@ function ProfileButton() {
               />
             </>
           )}
-        </ul>
-      )}
+        </div>
+      )
+      }
     </>
   );
 }

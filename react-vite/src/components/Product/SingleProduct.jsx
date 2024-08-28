@@ -126,7 +126,7 @@ const SingleProduct = () => {
                         : ""
                 }
                 {
-                    user ? <Form method='put' action={`/product/${product_num}`} >
+                    (user && user.lists.length > 0) ? <Form method='put' action={`/product/${product_num}`} >
                         <select name="list" id="list" value={list} onChange={(e) => setList(e.target.value)}>
                             {
                                 user.lists.map((list) => (

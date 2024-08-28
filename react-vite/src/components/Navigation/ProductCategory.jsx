@@ -6,7 +6,7 @@ function ProductCategoryDrop() {
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
     const navigate = useNavigate();
-
+    const url = window.location.href;
     const existing_categories = [
         "standard-balls",
         "special-balls",
@@ -66,7 +66,7 @@ function ProductCategoryDrop() {
 
     useEffect(() => {
         setShowMenu(false)
-    }, [navigate])
+    }, [navigate, url])
 
     return (
         <div className="category-drop">
@@ -75,7 +75,7 @@ function ProductCategoryDrop() {
             </button>
 
             <div className="curved none">
-                <div ref={ulRef} className={"profile-dropdown top center curved container-drop"}>
+                <div ref={ulRef} className={"profile-dropdown top center curved container-drop"} onMouseLeave={toggleMenu}>
                     {
                         showMenu && existing_categories.map((category) => (
                             <div key={category} className="max-width margins curved center">

@@ -30,6 +30,7 @@ const SingleOrder = () => {
         <div>
             <h2>Order Details</h2>
             <h3>Order ID #{current_order.id}</h3>
+            <p>{current_order.delivery_address}</p>
             {
                 current_order.status === 'Delivered' ? <p>Delivered at: {current_order.delivery_date}</p> : ""
             }
