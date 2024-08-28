@@ -9,6 +9,9 @@ def seed_users():
         email="demo@aa.io",
         password="password",
         address="Pallet Town",
+        city="Route 1",
+        state="CA",
+        zip=21345,
         first_name="Ash",
         last_name="Ketchum",
     )
@@ -17,6 +20,9 @@ def seed_users():
         email="marnie@aa.io",
         password="password",
         address="Spikemunth",
+        city="Route 2",
+        state="TX",
+        zip=12345,
         first_name="Marnie",
         last_name="Galar",
     )
@@ -25,6 +31,9 @@ def seed_users():
         email="bobbie@aa.io",
         password="password",
         address="Pallet Town",
+        city="Route 13",
+        state="NV",
+        zip=98765,
         first_name="Ash",
         last_name="Ketchum",
     )

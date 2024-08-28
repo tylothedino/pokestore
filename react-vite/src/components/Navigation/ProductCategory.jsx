@@ -69,19 +69,21 @@ function ProductCategoryDrop() {
     }, [navigate])
 
     return (
-        <div>
-            <button onClick={toggleMenu}>
-                Categories
+        <div className="category-drop">
+            <button onClick={toggleMenu} className="category-button">
+                Shop by Category
             </button>
 
-            <div ref={ulRef} className={"profile-dropdown"}>
-                {
-                    showMenu && existing_categories.map((category) => (
-                        <div key={category}>
-                            <button onClick={(e) => { e.stopPropagation(); setShowMenu(!showMenu); navigate(`/product/category/${category}`) }}>{category}</button>
-                        </div>
-                    ))
-                }
+            <div className="curved none">
+                <div ref={ulRef} className={"profile-dropdown top center curved container-drop"}>
+                    {
+                        showMenu && existing_categories.map((category) => (
+                            <div key={category} className="max-width margins curved center">
+                                <button className="max-width height-category button-style curved" onClick={(e) => { e.stopPropagation(); setShowMenu(!showMenu); navigate(`/product/category/${category}`) }}>{category}</button>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
 
         </div >

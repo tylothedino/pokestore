@@ -1,3 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 .profile-dropdown {
   position: absolute;
+  border-radius: 10px;
+  background-color: #6FA7EF;
+
+}
+
+.logo {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 250px;
+  font-style: normal;
+  font-size: small;
+  color: white;
+}
+
+.homebutton {
+  display: flex;
+}
+
+.homebutton:hover {
+  cursor: pointer;
+}
+
+.logo-img {
+  width: 35px;
+  height: 35px;
+}
+
+.parent {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.main-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  background-color: #0192CB;
+
+}
+
+.user-options {
+  display: flex;
+  gap: 2rem;
+}
+
+.category {
+  background-color: #136687;
+}
+
+.category-drop {
+  margin-left: 5rem;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.max-width {
+  width: 100%;
+}
+
+.height-category {
+  height: 2rem;
+}
+
+.button-style {
+  background-color: #6FA7EF;
+  border: none;
+  font-weight: bold;
+}
+
+.button-style:hover {
+  background-color: #5c8bc8;
+  cursor: pointer;
+}
+
+.curved {
+  border-radius: 10px;
+}
+
+.none {
+  background-color: none;
+}
+
+.container-drop {
+  width: 10rem;
+}
+
+.category-button {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 30px;
+  font-style: normal;
+  font-size: xx-small;
+  color: white;
+  background-color: #136687;
+  border: none;
+  height: 2rem;
+}
+
+.category-button:hover {
+  cursor: pointer;
+  background-color: #187da5;
 }
