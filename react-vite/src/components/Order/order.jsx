@@ -1,4 +1,4 @@
-import { Form, useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { Form, useLoaderData, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import CreateReview from "../Review/Modal/ReviewModal";
 import { useModal } from "../../context/Modal";
@@ -13,6 +13,10 @@ const Orders = () => {
             <h2>401 Unauthorized</h2>
 
         )
+    }
+
+    const handleSort = (a, b) => {
+        return b.id - a.id;
     }
 
     const handleCreateReview = (product_id, order_id) => {
@@ -33,8 +37,8 @@ const Orders = () => {
         <div>
             <h2>Orders</h2>
             {
-                orders.orders.map((order, index) => (
-                    <div key={index + "orderNumber" + order.id}>
+                orders.orders.sort(handleSort).map((order, index) => (
+                    <div key={index + "orderNumber" + order.id} onClick={(e) => { e.stopPropagation(); nav(`/order/${orders.orders.length - index}`) }}>
                         <header>
                             <h4>Order placed: {order.created_at}</h4>
                             <h4>Order #{order.id}</h4>
@@ -61,7 +65,7 @@ const Orders = () => {
                                 <Form method='delete' action={`/order/${order.id}`} >
                                     <button type="submit" name="intent" value='cancel-order'>Cancel Order</button>
                                     <input type='hidden' value={order.id} name="order_id" />
-                                    <input type='hidden' value={index} name="order_index" />
+                                    <input type='hidden' value={index + 1} name="order_index" />
                                 </Form>
 
                                 : ""

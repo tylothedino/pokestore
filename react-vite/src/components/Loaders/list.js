@@ -1,9 +1,9 @@
 
-import configureStore from "../../redux/store";
-import { thunkAuthenticate } from "../../redux/session";
-import { json } from "react-router-dom";
+// import configureStore from "../../redux/store";
+// import { thunkAuthenticate } from "../../redux/session";
+// import { json } from "react-router-dom";
 
-const store = configureStore();
+// const store = configureStore();
 
 
 export const allListLoader = async () => {

@@ -25,6 +25,7 @@ export const cartActions = async ({ request }) => {
     }
 
     if (intent === 'purchase-product') {
+        console.log("ORDER INDEX: ", data.order_index)
         const response = await fetch(`/api/cart/purchase`, {
             method: "POST",
             headers: {
@@ -35,7 +36,7 @@ export const cartActions = async ({ request }) => {
         if (response.ok) {
             const message = await response.json();
             console.log(message)
-            return redirect(`/order/${data.order_index}`)
+            return redirect(`/order/`)
         }
 
     }

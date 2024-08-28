@@ -1,6 +1,4 @@
-import { Form, useLoaderData, useParams } from "react-router-dom";
-import { useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const CategoryProduct = () => {
 

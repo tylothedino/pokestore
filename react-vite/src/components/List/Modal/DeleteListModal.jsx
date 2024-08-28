@@ -1,6 +1,4 @@
 import { Form } from "react-router-dom";
-import { useState } from "react";
-
 
 const DeleteList = ({ onClose, list_id, link }) => {
 

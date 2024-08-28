@@ -23,7 +23,6 @@ const SingleProduct = () => {
     })
 
     const [product_amount, set_amount] = useState(1);
-    const [purchased, setPurchased] = useState(false);
     const [list, setList] = useState(+user?.lists[0]?.id);
 
     const [actionResponse, setActionResponse] = useState("")
@@ -149,9 +148,7 @@ const SingleProduct = () => {
                 }
 
 
-                {
-                    purchased ? <p>Added product to cart</p> : ""
-                }
+
 
             </div>
 

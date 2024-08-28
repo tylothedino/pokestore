@@ -1,6 +1,6 @@
-import { Form, useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useModal } from "../../context/Modal";
 import CreateList from "./Modal/CreateListModal";
 import EditList from "./Modal/EditListModal";
