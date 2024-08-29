@@ -94,7 +94,13 @@ def purchase():
 
     # Create an order with the status of - PENDING
     order = Order(
-        status="Pending", total_cost=total, delivery_date=None, user_id=current_user.id
+        status="Pending",
+        total_cost=total,
+        delivery_date=None,
+        user_id=current_user.id,
+        delivery_address=(
+            f"{current_user.address}, {current_user.city}, {current_user.state} {current_user.zip}"
+        ),
     )
 
     db.session.add(order)
@@ -106,9 +112,6 @@ def purchase():
             order_id=order.id,
             product_id=product["product"]["id"],
             amount=product["amount"],
-            delivery_address=(
-                f"{current_user.address}, {current_user.city}, {current_user.state} {current_user.zip}"
-            ),
         )
         db.session.add(add_products)
 

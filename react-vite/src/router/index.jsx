@@ -23,23 +23,26 @@ import List from '../components/List/List';
 import { allListLoader } from '../components/Loaders/list';
 import SingleList from '../components/List/SingleList';
 import { listActions } from '../components/Actions/list';
+import HomePage from '../components/HomePage/HomePage';
 
 export const router = createBrowserRouter([
+  {
+    path: "signup",
+    element: <SignupFormPage />,
+  },
+  {
+    path: "login",
+    element: <LoginFormPage />,
+  },
   {
     element: <Layout />,
     children: [
       {
         path: "/",
-        element: <h1>Welcome!</h1>,
+        element: <HomePage />,
+        loader: allProductsLoader
       },
-      {
-        path: "login",
-        element: <LoginFormPage />,
-      },
-      {
-        path: "signup",
-        element: <SignupFormPage />,
-      },
+
       {
         path: "/product/category/:category",
         element: <CategoryProduct />,

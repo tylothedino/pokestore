@@ -119,3 +119,25 @@
   cursor: pointer;
   background-color: #187da5;
 }
+
+.profile-container {
+  width: 7rem;
+}
+
+.divide {
+  display: flex;
+  gap: 2rem;
+}
+
+.divide p {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 30px;
+  font-style: normal;
+  font-size: xx-small;
+  color: white;
+}
+
+.divide p:hover {
+  color: rgb(193, 193, 193);
+  cursor: pointer;
+}

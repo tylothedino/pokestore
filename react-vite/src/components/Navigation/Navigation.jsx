@@ -18,7 +18,14 @@ function Navigation() {
 
         <div className="user-options">
           <div>
-            <ProfileButton />
+            {
+              user ? <ProfileButton /> :
+                <div className="divide">
+                  <p onClick={(e) => { e.stopPropagation(); nav('/login') }}>Login</p>
+                  <p onClick={(e) => { e.stopPropagation(); nav('/signup') }}>Sign Up</p>
+                </div>
+
+            }
           </div>
 
           <div>

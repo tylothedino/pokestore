@@ -53,7 +53,7 @@ function ProfileButton() {
     <>
       <img onClick={toggleMenu} className="profile-icon" src="https://cdn2.iconfinder.com/data/icons/pokemon-go-16/614/8349_-_Psyduck-1024.png" />
       {showMenu && (
-        <div className={"profile-dropdown"} ref={ulRef} onMouseLeave={toggleMenu}>
+        <div className={"profile-dropdown profile-container"} ref={ulRef} onMouseLeave={toggleMenu}>
           {user ? (
             <>
               <p>{user.username}</p>
