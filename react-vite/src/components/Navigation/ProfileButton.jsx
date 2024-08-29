@@ -45,6 +45,7 @@ function ProfileButton() {
     e.preventDefault();
     dispatch(thunkLogout());
     closeMenu();
+    return nav('/')
   };
 
 
