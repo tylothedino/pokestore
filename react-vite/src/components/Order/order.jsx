@@ -69,7 +69,7 @@ const Orders = () => {
                                 <Form method='delete' action={`/order/${order.id}`} >
                                     <button className="submit-button-review" type="submit" name="intent" value='cancel-order'>Cancel Order</button>
                                     <input type='hidden' value={order.id} name="order_id" />
-                                    <input type='hidden' value={index + 1} name="order_index" />
+                                    <input type='hidden' value={orders.orders.length - index} name="order_index" />
                                 </Form>
 
                                 : ""

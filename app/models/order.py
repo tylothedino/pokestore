@@ -38,5 +38,7 @@ class Order(db.Model):
 
     def get_product(self):
         return {
-            "products": [product.to_dict() for product in self.order_products],
+            "products": [
+                product.to_dict_reviewless() for product in self.order_products
+            ],
         }

@@ -60,7 +60,7 @@ class User(db.Model, UserMixin):
             "zip": self.zip,
             "first_name": self.first_name,
             "last_name": self.last_name,
-            "products": [product.to_dict() for product in self.products],
+            # "products": [product.to_dict() for product in self.products],
             "orders": [order.to_dict() for order in self.orders],
             "cart": self.cart[0].to_dict(),
             "lists": [list.to_dict() for list in self.lists],

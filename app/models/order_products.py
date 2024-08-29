@@ -52,10 +52,10 @@ class OrderProduct(db.Model):
                 "effect": Product.query.get(self.product_id).effect,
                 "description": Product.query.get(self.product_id).description,
                 "image": Product.query.get(self.product_id).image,
-                "reviews": [
-                    review.to_dict()
-                    for review in Product.query.get(self.product_id).reviews
-                ],
+                # "reviews": [
+                #     review.to_dict()
+                #     for review in Product.query.get(self.product_id).reviews
+                # ],
             },
             "amount": self.amount,
         }

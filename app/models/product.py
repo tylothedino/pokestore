@@ -50,3 +50,14 @@ class Product(db.Model):
             "image": self.image,
             "reviews": [review.to_dict() for review in self.reviews],
         }
+
+    def to_dict_reviewless(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "price": self.price,
+            "category": self.category,
+            "effect": self.effect,
+            "description": self.description,
+            "image": self.image,
+        }

@@ -19,6 +19,21 @@ export const allProductsLoader = async () => {
 
 };
 
+export const allProductsLoaderReviewless = async () => {
+    const response = await fetch('/api/products/reviewless')
+
+    if (response.ok) {
+        const products = await response.json();
+
+        return { products };
+    }
+
+    return { products: [] }
+
+};
+
+
+
 
 
 export const categoryProductLoader = async ({ params }) => {

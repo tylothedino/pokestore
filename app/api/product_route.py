@@ -48,6 +48,12 @@ def all_product():
     return {"products": [product.to_dict() for product in products]}
 
 
+@product_routes.route("/reviewless")
+def all_product_reviewless():
+    products = Product.query.all()
+    return {"products": [product.to_dict_reviewless() for product in products]}
+
+
 @product_routes.route("/<string:category>")
 def product_category(category):
     if category not in existing_categories:

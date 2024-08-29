@@ -6,7 +6,7 @@ import SingleProduct from '../components/Product/SingleProduct';
 import Cart from '../components/Cart/cart';
 
 
-import { allProductsLoader, categoryProductLoader } from '../components/Loaders/product';
+import { allProductsLoader, allProductsLoaderReviewless, categoryProductLoader } from '../components/Loaders/product';
 import { cartLoader } from '../components/Loaders/cart';
 import { allOrderLoader } from '../components/Loaders/order';
 
@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
-        loader: allProductsLoader
+        loader: allProductsLoaderReviewless
       },
 
       {
