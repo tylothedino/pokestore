@@ -1,7 +1,7 @@
-import { Form, useLoaderData } from "react-router-dom";
+import { Form, useLoaderData, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
-
+import "./cart.css"
 
 const Cart = () => {
     const user = useSelector((state) => state.session.user);
@@ -9,7 +9,8 @@ const Cart = () => {
     const [total_price, setTotalPrice] = useState(0);
     const [amounts, setAmounts] = useState({});
 
-    const cart = useLoaderData().cart.cart
+    const cart = useLoaderData().cart.cart;
+    const nav = useNavigate();
 
     useEffect(() => {
         let total = 0
@@ -50,18 +51,21 @@ const Cart = () => {
 
 
     return (
-        <div>
-            <div>
+        <div className="cart">
+            <h1>Shopping Cart</h1>
+            <div className="cart-products">
                 {
                     cart?.products?.map((product) => (
-                        <div key={`product_cart_${product.product.id}`}>
-                            <h4>{product.amount}</h4>
-                            <p>{product.product.name}</p>
-                            <img src={product.product.image} />
-                            <p>{product.product.price}</p>
+                        <div className="products" key={`product_cart_${product.product.id}`}>
+                            <img className="product-image-cart" src={product.product.image} onClick={(e) => { e.stopPropagation(); nav(`/product/${product.product.id}`) }} />
+                            {/* <h4>{product.amount}</h4> */}
+                            <div className="product-details-cart">
+                                <p className="singleproduct-details">{product.product.name}</p>
+                                <p className="singleproduct-details green">¥{product.product.price} Each</p>
+                            </div>
 
-                            <Form method="put" action={`/cart`}>
-                                <select name="amount" defaultValue={product.amount} id="product_amount" value={amounts[product.product.id]} onChange={(e) => handleAmountChange(product.product.id, +e.target.value)}>
+                            <Form method="put" className="cart-data-change" action={`/cart`}>
+                                <select className="amount" name="amount" defaultValue={product.amount} id="product_amount" value={amounts[product.product.id]} onChange={(e) => handleAmountChange(product.product.id, +e.target.value)}>
                                     {renderAmount(product.amount, product.product.id)}
 
                                 </select>
@@ -72,6 +76,7 @@ const Cart = () => {
                                     type="submit"
                                     name='intent'
                                     value='remove-product'
+                                    className="submit-button"
                                 >Remove</button>
                             </Form>
 
@@ -80,17 +85,18 @@ const Cart = () => {
                 }
             </div>
 
-            <h3>Total price: {total_price}</h3>
-            <div>
-                <Form method="delete" action={`/cart`}>
-                    <button
-                        type="submit"
-                        name='intent'
-                        value='clear-cart'
-                    >Clear Cart</button>
-                </Form>
-            </div>
-            <div>
+            <div className="order-submit-details">
+                <div>
+                    <Form method="delete" action={`/cart`}>
+                        <button
+                            className="submit-button"
+                            type="submit"
+                            name='intent'
+                            value='clear-cart'
+                        >Clear Cart</button>
+                    </Form>
+                </div>
+                <h3 className="green">Total price: ¥{total_price}</h3>
                 {
                     cart?.products?.length > 0 ?
                         <Form method="post" action={`/cart`}>
@@ -98,6 +104,7 @@ const Cart = () => {
                                 type="submit"
                                 name='intent'
                                 value='purchase-product'
+                                className="submit-button"
                             >Purchase</button>
                             <input type="hidden" value={user.orders.length} name="order_index" />
                         </Form> : ""
