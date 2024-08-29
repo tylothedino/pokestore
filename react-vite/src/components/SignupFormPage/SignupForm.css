@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap');
+
+.login-images {
+    width: 60%;
+}
+
+.logintitle {
+    font-size: xxx-large;
+    font-family: "New Amsterdam", sans-serif;
+    font-style: normal;
+}
+
+.bigger-input {
+    height: 2rem;
+    font-size: large;
+}
