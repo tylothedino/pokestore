@@ -6,7 +6,7 @@ import SingleProduct from '../components/Product/SingleProduct';
 import Cart from '../components/Cart/cart';
 
 
-import { allProductsLoader, allProductsLoaderReviewless, categoryProductLoader, singleProductLoader } from '../components/Loaders/product';
+import { allProductsLoaderReviewless, categoryProductLoader, singleProductLoader } from '../components/Loaders/product';
 import { cartLoader } from '../components/Loaders/cart';
 import { allOrderLoader } from '../components/Loaders/order';
 
