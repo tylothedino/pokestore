@@ -5,7 +5,23 @@
   position: absolute;
   border-radius: 10px;
   background-color: #6FA7EF;
+}
 
+
+.dropdown-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.title {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 250px;
+  font-style: normal;
+  font-size: small;
+  color: white;
 }
 
 .category {
@@ -147,4 +163,18 @@
 .divide p:hover {
   color: rgb(193, 193, 193);
   cursor: pointer;
+}
+
+.dropdown-button {
+  width: 100%;
+  height: 2rem;
+  font-family: "New Amsterdam", sans-serif;
+  font-size: large;
+  font-style: normal;
+  background-color: silver;
+}
+
+.dropdown-button:hover {
+  cursor: pointer;
+  background-color: rgb(218, 215, 215);
 }

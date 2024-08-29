@@ -53,23 +53,20 @@ function ProfileButton() {
     <>
       <img onClick={toggleMenu} className="profile-icon" src="https://cdn2.iconfinder.com/data/icons/pokemon-go-16/614/8349_-_Psyduck-1024.png" />
       {showMenu && (
-        <div className={"profile-dropdown profile-container"} ref={ulRef} onMouseLeave={toggleMenu}>
+        <div className={"profile-dropdown"} ref={ulRef} onMouseLeave={toggleMenu}>
           {user ? (
-            <>
-              <p>{user.username}</p>
-              <p>{user.email}</p>
-              <div>
-                <button onClick={(e) => { e.stopPropagation; closeMenu(); nav('/list') }}>My lists</button>
-              </div>
-              <div>
-                <button onClick={(e) => { e.stopPropagation; closeMenu(); nav('/order') }}>Orders</button>
-              </div>
-              <div>
-                <button onClick={logout}>Log Out</button>
-              </div>
-            </>
+            <div className="dropdown-profile">
+              <p className="title">{user.username}'s Account</p>
+
+              <button className="dropdown-button" onClick={(e) => { e.stopPropagation; closeMenu(); nav('/list') }}>My lists</button>
+
+              <button className="dropdown-button" onClick={(e) => { e.stopPropagation; closeMenu(); nav('/order') }}>Orders</button>
+
+              <button className="dropdown-button" onClick={logout}>Log Out</button>
+
+            </div>
           ) : (
-            <>
+            <div>
               <OpenModalMenuItem
                 itemText="Log In"
                 onItemClick={closeMenu}
@@ -80,7 +77,7 @@ function ProfileButton() {
                 onItemClick={closeMenu}
                 modalComponent={<SignupFormModal />}
               />
-            </>
+            </div>
           )}
         </div>
       )
