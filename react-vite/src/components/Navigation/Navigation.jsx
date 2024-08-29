@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import ProductCategoryDrop from "./ProductCategory";
 import "./Navigation.css";

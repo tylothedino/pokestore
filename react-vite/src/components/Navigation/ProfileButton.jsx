@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FaUserCircle } from 'react-icons/fa';
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
@@ -57,7 +56,7 @@ function ProfileButton() {
         <div className={"profile-dropdown"} ref={ulRef} onMouseLeave={toggleMenu}>
           {user ? (
             <div className="dropdown-profile">
-              <p className="title">{user.username}'s Account</p>
+              <p className="title">{user.username}&apos;s Account</p>
 
               <button className="dropdown-button" onClick={(e) => { e.stopPropagation; closeMenu(); nav('/list') }}>My lists</button>
 

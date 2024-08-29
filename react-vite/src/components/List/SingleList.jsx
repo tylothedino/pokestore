@@ -3,7 +3,7 @@ import { Form, useLoaderData, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import EditList from "./Modal/EditListModal";
 import { useModal } from "../../context/Modal";
-import { useRef } from "react";
+
 import DeleteList from "./Modal/DeleteListModal";
 import { useSelector } from "react-redux";
 
@@ -14,7 +14,7 @@ const SingleList = () => {
     const { id } = useParams();
     const nav = useNavigate();
     const { setModalContent, closeModal } = useModal();
-    const ulRef = useRef();
+
     const user = useSelector((state) => state.session.user);
 
     if (!user) {
