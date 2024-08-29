@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap');
+
+.product-information {
+    margin: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.single-product-image {
+    border: 5px solid #0192CB;
+    border-radius: 15px;
+    width: 300px;
+    box-shadow: 2px 2px 2px 3px #03597a;
+}
+
+.single-product-details {
+    border: 3px solid gray;
+    padding: 2rem;
+    box-shadow: 2px 2px 2px 3px silver;
+    max-width: 50%;
+}
+
+.purchase-product {
+    border: 2px solid gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 2px 2px 2px 3px silver;
+}
+
+.product-name {
+    display: flex;
+    justify-content: start;
+    font-size: xx-large;
+}
+
+.singleproduct-details {
+    font-family: "New Amsterdam", sans-serif;
+    font-size: large;
+    font-style: normal;
+}
+
+.green {
+    color: rgb(12, 197, 12);
+}
+
+.select-cart-amount {
+    width: 100%;
+    background-color: silver;
+    border-radius: 15px;
+
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.margin-top {
+    margin-top: 2rem;
+    margin-bottom: 2px;
+}
+
+.add-to-cart-button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: silver;
+    border: none;
+    border-radius: 50px;
+    padding: 10px;
+    width: 100%;
+    font-family: "New Amsterdam", sans-serif;
+    font-size: small;
+    font-style: normal;
+}
+
+.add-to-cart-button:hover {
+    background-color: rgb(158, 157, 157);
+    cursor: pointer;
+}
+
+.select-list {
+    width: 100%;
+    background-color: silver;
+    border-radius: 15px;
+}
+
+.add-to-list {
+    border-top: 1px solid silver;
+    padding-top: 10px;
+}
+
+.add-to-cart {
+    border-top: 1px solid silver;
+    padding-top: 10px;
+}
+
+.form-of-product {
+    width: 100%;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.reviews-container {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    align-items: center;
+    gap: 1rem;
+
+}
+
+.button-review-submit {
+    width: 10rem;
+    height: 2rem;
+    border-radius: 50px;
+    border: 1px solid gray;
+    background-color: #07a6e6;
+    font-family: "New Amsterdam", sans-serif;
+    font-size: medium;
+    font-style: normal;
+}
+
+
+.button-review-submit:hover {
+    cursor: pointer;
+    background-color: #1bb5f3;
+}
+
+.review-title {
+    display: flex;
+    justify-content: flex-start;
+    font-size: xx-large;
+    margin-bottom: 0px;
+}
+
+.review-box {
+    border: 3px solid #0192CB;
+    padding: 2rem;
+    border-radius: 35px;
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+
+}
+
+.user-review {
+    font-family: "New Amsterdam", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+}
+
+.user-description-review {
+    font-family: "New Amsterdam", sans-serif;
+    font-size: 15px;
+    font-style: normal;
+}
+
+.response {
+    font-family: "New Amsterdam", sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    color: red;
+}
