@@ -48,3 +48,16 @@ export const categoryProductLoader = async ({ params }) => {
     return { products: [] }
 
 };
+
+export const singleProductLoader = async ({ params }) => {
+    const response = await fetch(`/api/products/${params.id}`)
+
+    if (response.ok) {
+        const products = await response.json();
+
+        return { products };
+    }
+
+    return { products: [] }
+
+};

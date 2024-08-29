@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+from .review import Review
 
 # from .cart_product import cart_products
 from .list_product import list_products
@@ -48,6 +49,10 @@ class Product(db.Model):
             "effect": self.effect,
             "description": self.description,
             "image": self.image,
+            # "reviews": [
+            #     review.to_dict()
+            #     for review in Review.query.filter(Review.product_id == self.id).all()
+            # ],
             "reviews": [review.to_dict() for review in self.reviews],
         }
 

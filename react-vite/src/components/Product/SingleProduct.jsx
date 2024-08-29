@@ -16,7 +16,9 @@ const SingleProduct = () => {
 
     const action = useActionData();
 
-    const current_product = products.products[product_num - 1];
+
+    const current_product = products.product;
+    console.log(current_product)
     const product_review = current_product.reviews;
     const product_category = current_product.category.split('-')
 
@@ -41,7 +43,6 @@ const SingleProduct = () => {
     }, [action?.message])
 
     // console.log("ACTION: ", actionResponses)
-    // console.log(current_product)
     // console.log(user)
     // console.log(product_review)
 
