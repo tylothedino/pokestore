@@ -33,9 +33,9 @@ function LoginFormPage() {
   };
 
   return (
-    <div className="container">
+    <div className="containers">
       <div className="left">
-        <h2 className="title">Welcome to the PokeMart!</h2>
+        <h2 className="titles">Welcome to the PokeMart!</h2>
         <img className="login-image" src="https://steamuserimages-a.akamaihd.net/ugc/1469813569889500026/79499A1D2C041DB4CFF6D27D5F7A4FCC969C5E5F/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false" />
 
       </div>
@@ -46,29 +46,29 @@ function LoginFormPage() {
         <form className="form" onSubmit={handleSubmit}>
           <div className="email">
             {errors.email && <p className="error">{errors.email}</p>}
-            <label>
+            <label className="font">
               Email
-              <input
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
             </label>
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
           <div className="password">
             {errors.password && <p className="error">{errors.password}</p>}
-            <label>
+            <label className="font">
               Password
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
             </label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
           </div>
-          <button type="submit">Log In</button>
+          <button className="font login-button" type="submit">Log In</button>
           <DemoLogin />
         </form>
       </div>

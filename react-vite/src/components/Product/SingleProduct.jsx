@@ -40,8 +40,8 @@ const SingleProduct = () => {
         setActionResponses(action?.message)
     }, [action?.message])
 
-    // console.log("ACTION: ", action)
-    console.log(current_product)
+    // console.log("ACTION: ", actionResponses)
+    // console.log(current_product)
     // console.log(user)
     // console.log(product_review)
 

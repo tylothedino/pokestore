@@ -123,9 +123,9 @@ function SignupFormModal() {
   };
 
   return (
-    <div className="container">
+    <div className="containers">
       <div className="left">
-        <h2 className="title">Welcome to the PokeMart!</h2>
+        <h2 className="titles">Welcome to the PokeMart!</h2>
         <img className='login-image' src="https://giffiles.alphacoders.com/129/129820.gif" />
       </div>
 
@@ -136,20 +136,38 @@ function SignupFormModal() {
           {errors.server && <p>{errors.server}</p>}
           <form className="login-form" onSubmit={handleSubmit}>
             <div>
-              <p>Email:</p>
-              <input
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                placeholder="Email"
-              />
-              {errors.email && <p className="error">{errors.email}</p>}
+              <div className="rows">
+                <div>
+                  <p className="font">Email:</p>
+                  <input
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    placeholder="Email"
+                  />
+                  {errors.email && <p className="error">{errors.email}</p>}
+                </div>
+                <div>
+                  <p className="font">Username:</p>
+                  <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                    placeholder="Username"
+                  />
+
+                  {errors.username && <p className="error">{errors.username}</p>}
+                </div>
+              </div>
+
+
             </div>
 
-            <div className="name-input">
+            <div className="rows">
               <div className="split-input">
-                <p>First Name:</p>
+                <p className="font">First Name:</p>
                 <input
                   type="text"
                   value={first_name}
@@ -162,7 +180,7 @@ function SignupFormModal() {
               </div>
 
               <div className="split-input">
-                <p>Last Name:</p>
+                <p className="font">Last Name:</p>
                 <input
                   type="text"
                   value={last_name}
@@ -176,22 +194,11 @@ function SignupFormModal() {
 
             </div>
 
-            <div>
-              <p>Username:</p>
-              <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                placeholder="Username"
-              />
 
-              {errors.username && <p className="error">{errors.username}</p>}
-            </div>
-            <div className="name-input">
+            <div className="rows">
 
               <div>
-                <p>Password:</p>
+                <p className="font">Password:</p>
                 <input
                   type="password"
                   value={password}
@@ -204,7 +211,7 @@ function SignupFormModal() {
               </div>
 
               <div>
-                <p>Confirm Password:</p>
+                <p className="font">Confirm Password:</p>
                 <input
                   type="password"
                   value={confirmPassword}
@@ -217,10 +224,10 @@ function SignupFormModal() {
               </div>
             </div>
 
-            <div className="name-input">
+            <div className="rows">
 
               <div>
-                <p>Address:</p>
+                <p className="font">Address:</p>
                 <input
                   type="text"
                   value={address}
@@ -233,7 +240,7 @@ function SignupFormModal() {
               </div>
 
               <div>
-                <p>City:</p>
+                <p className="font">City:</p>
                 <input
                   type="text"
                   value={city}
@@ -246,10 +253,10 @@ function SignupFormModal() {
               </div>
             </div>
 
-            <div className="name-input">
+            <div className="rows">
 
               <div>
-                <p>State:</p>
+                <p className="font">State:</p>
                 <input
                   type="text"
                   value={state}
@@ -262,7 +269,7 @@ function SignupFormModal() {
               </div>
 
               <div>
-                <p>Zip Code:</p>
+                <p className="font">Zip Code:</p>
                 <input
                   type="text"
                   value={zipcode}
@@ -275,7 +282,7 @@ function SignupFormModal() {
               </div>
             </div>
 
-            <button className="login-button" type="submit">Sign Up</button>
+            <button className="login-button gap-margin" type="submit">Sign Up</button>
           </form>
         </div>
       </div>

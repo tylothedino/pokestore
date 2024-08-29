@@ -31,7 +31,7 @@ function DemoLogin() {
     };
 
     return (
-        <button className="login-button" id="DemoLogin" onClick={handleClick}>
+        <button className="login-button font" id="DemoLogin" onClick={handleClick}>
             Demo User Login
         </button>
 

@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap');
+
+.modalbox {
+    width: 500px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.deleteClose {
+    border: none;
+    background-color: white;
+    font-size: medium;
+}
+
+.deleteClose:hover {
+    cursor: pointer;
+    color: gray;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.form-description {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+}
+
+.review-title-head {
+    display: flex;
+    justify-content: center;
+    font-size: xx-large;
+    font-family: "New Amsterdam", sans-serif;
+    font-style: normal;
+}
+
+.review-title-body {
+    display: flex;
+    font-size: large;
+    font-family: "New Amsterdam", sans-serif;
+    font-style: normal;
+}
+
+.submit-button-review {
+    font-size: large;
+    font-family: "New Amsterdam", sans-serif;
+    font-style: normal;
+    height: 3rem;
+    margin-top: 1rem;
+    background-color: #37b5e7;
+    border-radius: 50px;
+    box-shadow: 2px 2px 2px 2px black;
+}
+
+.submit-button-review:hover {
+    cursor: pointer;
+    background-color: #49b8e4;
+}
+
+.form-box {
+    height: 3rem;
+    font-size: medium;
+}
+
+.forms {
+    padding-bottom: 5rem;
+    overflow-wrap: break-word;
+
+}

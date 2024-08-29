@@ -52,7 +52,7 @@ def edit_review(id):
         review.rating = body["rating"]
 
     db.session.commit()
-    return {"message": "Updated review"}
+    return {"messagese": "Updated review"}
 
 
 @review_routes.route("/<int:id>/delete", methods=["DELETE"])
@@ -69,4 +69,4 @@ def delete_review(id):
     db.session.delete(review)
     db.session.commit()
 
-    return {"message": "Review has been deleted"}
+    return {"messageDelete": "Review has been deleted"}
