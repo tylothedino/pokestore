@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap');
+
+
+
+.order-title {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.list-title {
+    font-size: xxx-large;
+    font-family: "New Amsterdam", sans-serif;
+    font-style: normal;
+}
+
+.button-create-list {
+    height: 2.5rem;
+    background-color: #0192CB;
+    border: 3px #136687 solid;
+    border-radius: 50px;
+    font-size: large;
+    font-family: "New Amsterdam", sans-serif;
+    font-style: normal;
+}
+
+.button-create-list:hover {
+    cursor: pointer;
+    background-color: #0baae9;
+}
+
+.single-list-in-all {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+    padding: 1rem;
+    border: solid 3px #0192CB;
+    box-shadow: 2px 2px 2px 2px #136687;
+    margin-bottom: 3rem;
+    width: 55rem;
+    justify-content: space-around;
+}
+
+.list-control-button {
+    display: flex;
+    gap: 5px;
+
+}
+
+.list-name-title {
+    font-size: xx-large;
+    width: 10rem;
+    border: 3px solid gray;
+    border-radius: 50px;
+    box-shadow: 2px 2px 2px 2px rgb(107, 107, 107);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+
+.list-name-title:hover {
+    cursor: pointer;
+    background-color: silver;
+
+}
+
+.list-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: xx-large;
+    font-family: "New Amsterdam", sans-serif;
+    font-style: normal;
+    width: 15rem;
+}
+
+.manage-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.list-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.no-bottom {
+    margin-bottom: 5px;
+}
+
+.gap {
+    display: flex;
+    margin: 10px;
+    padding-bottom: 10px;
+}

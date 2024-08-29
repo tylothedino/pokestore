@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import CreateReview from "../Review/Modal/ReviewModal";
 import { useModal } from "../../context/Modal";
 
+import './Order.css'
+
 const Orders = () => {
     const user = useSelector((state) => state.session.user);
     const { orders } = useLoaderData();
@@ -34,27 +36,29 @@ const Orders = () => {
     }
 
     return (
-        <div>
-            <h2>Orders</h2>
+        <div className="container">
+            <h2 className="list-title">Orders</h2>
             {
                 orders.orders.sort(handleSort).map((order, index) => (
-                    <div key={index + "orderNumber" + order.id} onClick={(e) => { e.stopPropagation(); nav(`/order/${orders.orders.length - index}`) }}>
-                        <header>
+                    <div key={index + "orderNumber" + order.id} onClick={(e) => { e.stopPropagation(); nav(`/order/${orders.orders.length - index}`) }} className="order-container">
+                        <header className="order-details-title">
                             <h4>Order placed: {order.created_at}</h4>
                             <h4>Order #{order.id}</h4>
-                            <h4>Total cost:{order.total_cost}</h4>
+                            <h4>Total cost: ¥{order.total_cost}</h4>
                             <h4>Order Status: {order.status}</h4>
                         </header>
                         <div>
                             {
                                 order.products.map((product) => (
-                                    <div key={product.product.id}>
-                                        <img src={product.product.image} />
-                                        <p>{product.product.name}</p>
-                                        <p>Amount: {product.amount}</p>
-                                        <button onClick={(e) => { e.stopPropagation(); nav(`/product/${product.product.id}`) }}>View Product</button>
+                                    <div key={product.product.id} className="products gap order-products">
+                                        <img className="product-image-cart" src={product.product.image} />
+                                        <div className="product-details-order">
+                                            <p className="singleproduct-details">{product.product.name}</p>
+                                            <p className="singleproduct-details">Amount: {product.amount}</p>
+                                        </div>
+                                        <button className="submit-button height-larger " onClick={(e) => { e.stopPropagation(); nav(`/product/${product.product.id}`) }}>View Product</button>
 
-                                        <button type="submit" onClick={(e) => { e.stopPropagation(); handleCreateReview(product.product.id, order.id); }}>Add Review</button>
+                                        <button className="submit-button height-larger " type="submit" onClick={(e) => { e.stopPropagation(); handleCreateReview(product.product.id, order.id); }}>Add Review</button>
                                     </div>
                                 ))
                             }
@@ -63,7 +67,7 @@ const Orders = () => {
                             order.status != 'Cancelled' && order.status != 'Returned' ?
 
                                 <Form method='delete' action={`/order/${order.id}`} >
-                                    <button type="submit" name="intent" value='cancel-order'>Cancel Order</button>
+                                    <button className="submit-button-review" type="submit" name="intent" value='cancel-order'>Cancel Order</button>
                                     <input type='hidden' value={order.id} name="order_id" />
                                     <input type='hidden' value={index + 1} name="order_index" />
                                 </Form>

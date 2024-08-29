@@ -79,7 +79,7 @@ function ProductCategoryDrop() {
                 <div ref={ulRef} className={"profile-dropdown top center curved container-drop"} onMouseLeave={toggleMenu}>
                     {
                         showMenu && existing_categories.map((category) => (
-                            <div key={category} className="max-width margins curved center ">
+                            <div key={category} className="max-width curved center ">
                                 <button className="max-width height-category button-style curved category" onClick={(e) => { e.stopPropagation(); setShowMenu(!showMenu); navigate(`/product/category/${category}`) }}>{category.toUpperCase().split('-').join(" ")}</button>
                             </div>
                         ))
