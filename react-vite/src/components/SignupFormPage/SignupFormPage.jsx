@@ -116,7 +116,7 @@ function SignupFormModal() {
 
       return setErrors(error);
     } else {
-      nav('/')
+      return nav('/')
     }
 
 
