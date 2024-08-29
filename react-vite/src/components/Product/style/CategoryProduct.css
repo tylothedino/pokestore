@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap');
+
+.product-container {
+    border: 5px solid #C0C0C0;
+    margin: 1rem;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-container:hover {
+    cursor: pointer;
+    background-color: rgb(231, 231, 231);
+}
+
+.category-product-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.product-image {
+    width: 100px;
+}
+
+.product-details {
+    font-family: "New Amsterdam", sans-serif;
+    font-size: x-large;
+    font-style: normal;
+}
