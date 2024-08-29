@@ -11,6 +11,11 @@
     margin-bottom: 2rem;
 }
 
+.order-container:hover {
+    cursor: pointer;
+    background-color: rgb(234, 233, 233);
+}
+
 .order-details-title {
     display: flex;
     flex-direction: row;
@@ -37,6 +42,7 @@
     align-items: center;
     padding: 2rem;
     width: 90%;
+    background-color: white;
 }
 
 .height-larger {

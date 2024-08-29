@@ -11,18 +11,17 @@ import "./style/SingleProduct.css"
 
 const SingleProduct = () => {
     const { products } = useLoaderData();
-    const { product_num } = useParams();
+    const { id } = useParams();
     const user = useSelector((state) => state.session.user);
 
     const action = useActionData();
 
 
     const current_product = products.product;
-    console.log(current_product)
-    const product_review = current_product.reviews;
-    const product_category = current_product.category.split('-')
+    const product_review = current_product?.reviews;
+    const product_category = current_product?.category.split('-')
 
-    product_category.map((product, index) => {
+    product_category?.map((product, index) => {
         product_category[index] = product.charAt(0).toUpperCase() + product.slice(1);
     })
 
@@ -44,7 +43,7 @@ const SingleProduct = () => {
 
     // console.log("ACTION: ", actionResponses)
     // console.log(user)
-    // console.log(product_review)
+    // console.log(id)
 
     const handleCreateReview = () => {
         setModalContent(
@@ -52,7 +51,7 @@ const SingleProduct = () => {
                 <CreateReviewProduct
                     onClose={closeModal}
                     className="modal-container"
-                    product_id={product_num}
+                    product_id={id}
                     user_id={user.id}
                 />
             </div>
@@ -65,7 +64,7 @@ const SingleProduct = () => {
                 <EditReviewProduct
                     onClose={closeModal}
                     className="modal-container"
-                    product_id={product_num}
+                    product_id={id}
                     user_id={user.id}
                     review={review}
                 />
@@ -79,7 +78,7 @@ const SingleProduct = () => {
                 <DeleteReviewProduct
                     onClose={closeModal}
                     className="modal-container"
-                    product_id={product_num}
+                    product_id={id}
                     user_id={user.id}
                     review={review}
                 />
@@ -91,27 +90,27 @@ const SingleProduct = () => {
         <div>
 
             <div className="product-information">
-                <img className="single-product-image" src={current_product.image} />
+                <img className="single-product-image" src={current_product?.image} />
 
                 <div className="single-product-details">
-                    <h3 className="product-name">{current_product.name}</h3>
+                    <h3 className="product-name">{current_product?.name}</h3>
                     {
-                        current_product.reviews.length > 0 ? <p className="singleproduct-details">⭐{(current_product.reviews.reduce((accum, review) => (
+                        current_product?.reviews.length > 0 ? <p className="singleproduct-details">⭐{(current_product?.reviews.reduce((accum, review) => (
                             accum + review.rating
-                        ), 0) / current_product.reviews.length).toFixed(1)}</p> : <p>⭐-</p>
+                        ), 0) / current_product?.reviews.length).toFixed(1)}</p> : <p>⭐-</p>
                     }
-                    <p className="singleproduct-details">Category - {product_category.join(" ")}</p>
-                    <p className="singleproduct-details green">¥{current_product.price}</p>
+                    <p className="singleproduct-details">Category - {product_category?.join(" ")}</p>
+                    <p className="singleproduct-details green">¥{current_product?.price}</p>
 
-                    <p className="singleproduct-details">{current_product.description}</p>
-                    <p className="singleproduct-details">{current_product.effect}</p>
+                    <p className="singleproduct-details">{current_product?.description}</p>
+                    <p className="singleproduct-details">{current_product?.effect}</p>
 
                 </div>
 
 
                 <div className={`purchase-product ${!user ? "hidden" : ""}`} >
                     {
-                        user ? <Form method='put' action={`/product/${product_num}`} className="form-of-product">
+                        user ? <Form method='put' action={`/product/${id}`} className="form-of-product">
                             <h3 className="add-to-cart">Add to Cart</h3>
                             <p className="singleproduct-details center no-margin margin-top">Quantity</p>
                             <div>
@@ -128,7 +127,7 @@ const SingleProduct = () => {
                                     <option value="10">10</option>
                                 </select>
                             </div>
-                            <input type='hidden' value={product_num} name="product_id" />
+                            <input type='hidden' value={id} name="product_id" />
                             <button
                                 type="submit"
                                 name='intent'
@@ -146,16 +145,16 @@ const SingleProduct = () => {
 
                             <div>
                                 <h3 className="add-to-list">Add to List</h3>
-                                <Form method='put' action={`/product/${product_num}`} >
+                                <Form method='put' action={`/product/${id}`} >
                                     <select className='select-list' name="list" id="list" value={list} onChange={(e) => setList(e.target.value)}>
                                         {
-                                            user.lists.map((list) => (
+                                            user.lists?.map((list) => (
                                                 list.products.includes(current_product) ? "" : <option key={list.id} value={list.id}>{list.name}</option>
                                             ))
                                         }
 
                                     </select>
-                                    <input type='hidden' value={product_num} name="product_id" />
+                                    <input type='hidden' value={id} name="product_id" />
                                     <button
                                         type="submit"
                                         name='intent'
@@ -187,7 +186,7 @@ const SingleProduct = () => {
                 }
                 {
 
-                    product_review.map((review) => (
+                    product_review?.map((review) => (
                         <div key={review.id} className="review-box">
                             <h4 className="singleproduct-details">{review.name}</h4>
                             <p className="user-review">👩‍🦲 {review.owner.username}</p>
