@@ -1,14 +1,13 @@
 import { Form } from "react-router-dom";
 import { useState } from "react";
 
-
 const CreateReview = ({ onClose, product_id, user_id }) => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [rating, setRating] = useState(5);
 
     return (
-        < div className="modalbox" >
+        <div className="modalbox" >
             <div>
                 <button className="deleteClose" onClick={onClose}>✖</button>
                 <h2>Create Review</h2>
