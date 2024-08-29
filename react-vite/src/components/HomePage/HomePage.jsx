@@ -9,8 +9,8 @@ const HomePage = () => {
     const user = useSelector((state) => state.session.user);
     const products = useLoaderData().products.products;
 
-    const orderNumber = Math.ceil(Math.random() * (user.orders.length)) - 1;
-    const productNumber = Math.ceil(Math.random() * user.orders[orderNumber].products.length) - 1;
+    const orderNumber = Math.ceil(Math.random() * (user?.orders.length)) - 1;
+    const productNumber = Math.ceil(Math.random() * user?.orders[orderNumber].products.length) - 1;
 
     const existing_categories = [
         "standard-balls",
@@ -48,7 +48,7 @@ const HomePage = () => {
         "all-machines",
     ];
 
-    const [buyAgain] = useState(user.orders[orderNumber].products[productNumber].product);
+    const [buyAgain] = useState(user?.orders[orderNumber].products[productNumber].product);
 
 
     const [category1] = useState(existing_categories[Math.ceil((Math.random() * existing_categories.length) - 1)])
@@ -76,20 +76,18 @@ const HomePage = () => {
                         <img src="https://cf.geekdo-images.com/tNCtl9FASwE1azZQIcVrbw__original/img/CN7VSs_2_Hi_Pb6eSu1bcQxE2RU=/0x0/filters:format(jpeg)/pic6488722.jpg" className="sponsored-by" />
                     </div>
 
-                    <div>
-                        {
-                            user && user.orders ?
+                    {
+                        user && user.orders ?
+                            <div>
+                                <h3>Buy Again</h3>
                                 <div>
-                                    <h3>Buy Again</h3>
-                                    <div>
-                                        <img src={buyAgain.image} className="buy-again" onClick={(e) => { e.stopPropagation(); nav(`/product/${buyAgain.id}`) }} />
-
-                                    </div>
+                                    <img src={buyAgain.image} className="buy-again" onClick={(e) => { e.stopPropagation(); nav(`/product/${buyAgain.id}`) }} />
 
                                 </div>
-                                : ""
-                        }
-                    </div>
+
+                            </div>
+                            : ""
+                    }
 
                 </div>
 
