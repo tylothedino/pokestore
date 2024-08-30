@@ -9,12 +9,19 @@ import DeleteReviewProduct from "../Review/Modal/DeleteReviewModal";
 
 import "./style/SingleProduct.css"
 
+import { useDispatch } from "react-redux";
+
+import { thunkAuthenticate } from "../../redux/session";
+
 const SingleProduct = () => {
     const { products } = useLoaderData();
     const { id } = useParams();
     const user = useSelector((state) => state.session.user);
 
     const action = useActionData();
+
+
+    const dispatch = useDispatch();
 
 
     const current_product = products.product;
@@ -24,6 +31,12 @@ const SingleProduct = () => {
     product_category?.map((product, index) => {
         product_category[index] = product.charAt(0).toUpperCase() + product.slice(1);
     })
+
+    useEffect(() => {
+        dispatch(thunkAuthenticate()).then(() => setIsLoaded(true));
+    }, [dispatch]);
+
+
 
     const [product_amount, set_amount] = useState(1);
     const [list, setList] = useState(+user?.lists[0]?.id);

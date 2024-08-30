@@ -12,6 +12,10 @@ const Cart = () => {
     const cart = useLoaderData().cart.cart;
     const nav = useNavigate();
 
+
+
+
+
     useEffect(() => {
         let total = 0
         cart?.products?.map((product) => {
