@@ -157,6 +157,7 @@
     font-family: "New Amsterdam", sans-serif;
     font-size: 15px;
     font-style: normal;
+    word-wrap: break-word;
 }
 
 .response {

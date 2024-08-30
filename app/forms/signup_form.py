@@ -29,7 +29,7 @@ def correct_zip(form, field):
 class SignUpForm(FlaskForm):
     username = StringField("username", validators=[DataRequired(), username_exists])
     email = StringField("email", validators=[DataRequired(), user_exists])
-    password = StringField("password", validators=[DataRequired()])
+    password = StringField("password", validators=[DataRequired(), Length(6, 255)])
     first_name = StringField("first_name", validators=[DataRequired(), Length(1, 20)])
     last_name = StringField("last_name", validators=[DataRequired(), Length(1, 20)])
     address = StringField("address", validators=[DataRequired(), Length(1, 50)])

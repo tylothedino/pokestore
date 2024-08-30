@@ -24,6 +24,25 @@ export const cartActions = async ({ request }) => {
         }
     }
 
+
+    if (intent === 'update-product') {
+        const response = await fetch(`/api/cart/update/${data.product_id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                amount: +data.amount
+            })
+        })
+
+        if (response.ok) {
+            const message = await response.json();
+            return message
+        }
+    }
+
+
     if (intent === 'purchase-product') {
         console.log("ORDER INDEX: ", data.order_index)
         const response = await fetch(`/api/cart/purchase`, {

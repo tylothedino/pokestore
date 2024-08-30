@@ -18,6 +18,14 @@ const Cart = () => {
             total += (product.product.price * product.amount)
         })
         setTotalPrice(total)
+
+        cart.products.forEach((product) => {
+            setAmounts(prevAmounts => ({
+                ...prevAmounts,
+                [product.product.id]: product.amount
+            }));
+        })
+
     }, [cart])
 
     if (!user) {
@@ -31,24 +39,13 @@ const Cart = () => {
 
 
 
+
     const handleAmountChange = (productId, newAmount) => {
         setAmounts(prevAmounts => ({
             ...prevAmounts,
             [productId]: newAmount
         }));
     };
-
-
-    const renderAmount = (max, product_id) => {
-        const options = [];
-        for (let i = 1; i <= max; i++) {
-            options.push(<option key={`${product_id}_${i}`} value={i}>{i}</option>)
-        }
-
-        return options
-    }
-
-
 
     return (
         <div className="cart">
@@ -62,22 +59,25 @@ const Cart = () => {
                             <div className="product-details-cart">
                                 <p className="singleproduct-details">{product.product.name}</p>
                                 <p className="singleproduct-details green">¥{product.product.price} Each</p>
+                                <p className="singleproduct-details">{product.amount} in cart</p>
                             </div>
 
                             <Form method="put" className="cart-data-change" action={`/cart`}>
-                                <select className="amount" name="amount" defaultValue={product.amount} id="product_amount" value={amounts[product.product.id]} onChange={(e) => handleAmountChange(product.product.id, +e.target.value)}>
-                                    {renderAmount(product.amount, product.product.id)}
+                                <input type="number" className="amount" name="amount" defaultValue={product.amount} id="product_amount" min={0} value={amounts[product.product.id]} onChange={(e) => handleAmountChange(product.product.id, +e.target.value)}>
+                                    {/* {renderAmount(product.amount, product.product.id)} */}
 
-                                </select>
+                                </input>
 
                                 <input type='hidden' value={product.product.id} name='product_id' />
 
                                 <button
                                     type="submit"
                                     name='intent'
-                                    value='remove-product'
+                                    value='update-product'
                                     className="submit-button"
-                                >Remove</button>
+                                >{
+                                        amounts[product.product.id] > 0 && product.amount > 0 ? "Change" : "Remove"
+                                    }</button>
                             </Form>
 
                         </div>

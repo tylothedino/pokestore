@@ -59,6 +59,7 @@ const SingleList = () => {
             <div className="manage-list">
                 <h2 className="list-title no-bottom">{currentList.name}</h2>
                 <div className="list-buttons">
+                    <button className="button-create-list" onClick={(e) => { e.stopPropagation(); nav('/list') }}>Return to your Lists</button>
                     <button className='button-create-list' type="submit" onClick={(e) => { e.stopPropagation(); handleEditList(currentList.name, currentList.id); }}>Edit List</button>
                     <button className='button-create-list' type="submit" onClick={(e) => { e.stopPropagation(); handleDeleteList(currentList.id); }}>Delete List</button>
                 </div>

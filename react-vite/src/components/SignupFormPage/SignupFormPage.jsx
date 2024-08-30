@@ -50,7 +50,7 @@ function SignupFormModal() {
       error.password = "Password is too long!"
     }
     if (password.length < 5) {
-      error.password = "Password is too short!"
+      error.password = "Password must be at least 6 characters!"
     }
     if (password.length < 0) {
       error.password = "Password is required"
@@ -59,7 +59,10 @@ function SignupFormModal() {
       error.confirmPassword = "Confirm Password field must be the same as the Password field"
     }
     if (isNaN(Number(zip))) {
-      error.zipcode = "Invalid Zip code"
+      error.zipcode = "Zip code must be made of numbers"
+    }
+    if (zip.length !== 5) {
+      error.zipcode = "A valid zip code is made up of 5 numbers"
     }
 
 

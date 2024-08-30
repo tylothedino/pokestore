@@ -1,6 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import './HomepageStyle.css'
+// import { useEffect, useState } from "react";
 import { useState } from "react";
 
 
@@ -11,6 +12,13 @@ const HomePage = () => {
 
     const orderNumber = Math.ceil(Math.random() * (user?.orders.length)) - 1;
     const productNumber = Math.ceil(Math.random() * user?.orders[orderNumber]?.products.length) - 1;
+
+    // const [userOrders, setUserOrders] = useState([])
+
+    // useEffect(() => {
+    //     setUserOrders(user.orders)
+    // })
+
 
     const existing_categories = [
         "standard-balls",

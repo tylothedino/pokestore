@@ -22,7 +22,9 @@ const CreateReviewProduct = ({ onClose, product_id, user_id }) => {
 
                 <p className="review-title-body">Description:</p>
                 <input className="form-box forms" required type='textarea' name="description" value={description} onChange={(e) => setDescription(e.target.value)} />
-
+                {
+                    description.length > 255 ? <p className="error">Your description cannot exceed 255 characters</p> : ""
+                }
 
                 <p className="review-title-body">Rating: {rating}</p>
                 <input className="form-box" required max="5" min="0" type='range' name="rating" value={rating} onChange={(e) => setRating(e.target.value)} />
@@ -32,7 +34,7 @@ const CreateReviewProduct = ({ onClose, product_id, user_id }) => {
                 <button
                     className="submit-button-review"
                     type="submit"
-                    disabled={name === '' || name.length > 30 || description.length === 0}
+                    disabled={name === '' || name.length > 30 || description.length === 0 || description.length > 255}
                     name='intent'
                     value='create-review'
                 >Submit Review</button>

@@ -53,6 +53,32 @@ def remove_product(product_id):
     return {"message": f"Removed {amount} {product.name} to your cart"}
 
 
+@cart_routes.route("/update/<int:product_id>", methods=["PUT"])
+@login_required
+def update_amount(product_id):
+
+    body = request.get_json()
+    product = Product.query.get(product_id)
+    cart = Cart.query.filter(Cart.user_id == current_user.id).first()
+    existing_cart = CartProduct.query.filter_by(
+        cart_id=cart.id, product_id=product.id
+    ).first()
+    amount = body["amount"]
+
+    if product is None:
+        return {"errors": {"message": "Not Found"}}, 404
+
+    if amount == 0:
+        db.session.delete(existing_cart)
+
+    else:
+        existing_cart.amount = amount
+
+    db.session.commit()
+
+    return {"message": f"Updated {amount} {product.name} to your cart"}
+
+
 @cart_routes.route("/remove/<int:product_id>/all", methods=["PUT"])
 @login_required
 def remove_all_product(product_id):
