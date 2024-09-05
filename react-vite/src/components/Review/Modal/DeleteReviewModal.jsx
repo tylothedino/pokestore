@@ -1,8 +1,21 @@
 import { Form } from "react-router-dom";
 import "./Modal.css"
+import { useEffect } from "react";
 
 
 const DeleteReviewProduct = ({ onClose, product_id, review }) => {
+    useEffect(() => {
+        const handlePageChange = () => {
+            // Perform actions when page changes
+            onClose();
+        };
+
+        window.addEventListener('popstate', handlePageChange);
+
+        return () => {
+            window.removeEventListener('popstate', handlePageChange);
+        };
+    }, [onClose]);
 
     return (
         < div className="modalbox" >

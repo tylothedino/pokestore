@@ -1,10 +1,24 @@
 import { Form } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 const EditList = ({ onClose, list_name, list_id, link }) => {
 
-    const [listName, setListName] = useState(list_name)
+    const [listName, setListName] = useState(list_name);
+
+    useEffect(() => {
+        const handlePageChange = () => {
+            // Perform actions when page changes
+            onClose();
+        };
+
+        window.addEventListener('popstate', handlePageChange);
+
+        return () => {
+            window.removeEventListener('popstate', handlePageChange);
+        };
+    }, [onClose]);
+
 
     return (
         < div className="modalbox" >

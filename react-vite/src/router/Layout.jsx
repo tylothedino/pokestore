@@ -33,6 +33,7 @@ export default function Layout() {
 
           <h3 className="create-by">Created by: Tyler Kim</h3>
           <a className="references" href="https://www.linkedin.com/in/tylothedino/" style={{ cursor: 'pointer', color: 'white' }}>Linkedin</a>
+          <a className="references" href="https://github.com/tylothedino" style={{ cursor: 'pointer', color: 'white' }}>Github</a>
 
         </div>
       </footer>

@@ -1,11 +1,25 @@
 import { Form } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Modal.css"
 
 const EditReviewProduct = ({ onClose, product_id, user_id, review }) => {
     const [name, setName] = useState(review.name);
     const [description, setDescription] = useState(review.description);
     const [rating, setRating] = useState(review.rating);
+
+    useEffect(() => {
+        const handlePageChange = () => {
+            // Perform actions when page changes
+            onClose();
+        };
+
+        window.addEventListener('popstate', handlePageChange);
+
+        return () => {
+            window.removeEventListener('popstate', handlePageChange);
+        };
+    }, [onClose]);
+
 
     return (
         < div className="modalbox" >

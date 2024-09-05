@@ -126,20 +126,10 @@ const SingleProduct = () => {
                         user ? <Form method='put' action={`/product/${id}`} className="form-of-product">
                             <h3 className="add-to-cart">Add to Cart</h3>
                             <p className="singleproduct-details center no-margin margin-top">Quantity</p>
-                            <div>
-                                <select className="select-cart-amount" name="amount" id="product_amount" value={product_amount} onChange={(e) => set_amount(+e.target.value)}>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                </select>
-                            </div>
+                            <input type="number" className="amount" name="amount" defaultValue={1} id="product_amount" min={0} value={product_amount} onChange={(e) => set_amount(e.target.value)}>
+                                {/* {renderAmount(product.amount, product.product.id)} */}
+
+                            </input>
                             <input type='hidden' value={id} name="product_id" />
                             <button
                                 type="submit"

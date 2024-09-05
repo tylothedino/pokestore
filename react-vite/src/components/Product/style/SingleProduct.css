@@ -46,8 +46,8 @@
     color: rgb(12, 197, 12);
 }
 
-.select-cart-amount {
-    width: 100%;
+.amount {
+    width: 95%;
     background-color: silver;
     border-radius: 15px;
 

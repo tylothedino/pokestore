@@ -23,7 +23,15 @@ const SingleList = () => {
 
         )
     }
+
     const currentList = lists.lists[id - 1]
+
+    if (!currentList) {
+        return (
+            <h2>404 Not Found</h2>
+
+        )
+    }
 
     const handleEditList = (list_name, list_id) => {
         setModalContent(

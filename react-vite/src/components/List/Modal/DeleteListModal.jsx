@@ -1,6 +1,20 @@
+import { useEffect } from "react";
 import { Form } from "react-router-dom";
 
 const DeleteList = ({ onClose, list_id, link, list_name }) => {
+    useEffect(() => {
+        const handlePageChange = () => {
+            // Perform actions when page changes
+            onClose();
+        };
+
+        window.addEventListener('popstate', handlePageChange);
+
+        return () => {
+            window.removeEventListener('popstate', handlePageChange);
+        };
+    }, [onClose]);
+
 
     return (
         < div className="modalbox" >
