@@ -1,131 +1,786 @@
-# Flask React Project
+# **Pokestore**
+### Pokestore is a financial web application inspired from Amazon, that displays over 300 purchasable items using the PokeAPI library. The application allows users to make purchases, create, read, update and delete reviews and lists, and update orders.
 
-This is the starter for the Flask React project.
+# Live Link
+https://pokestore-ovzh.onrender.com/
 
-## Getting started
 
-1. Clone this repository (only this branch).
+## Tech Stack
+### Frameworks and Libraries
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 
-2. Install dependencies.
+ ### Database:
+ ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
-   ```bash
-   pipenv install -r requirements.txt
-   ```
+ ### Hosting:
+ ![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
 
-3. Create a __.env__ file based on the example with proper settings for your
-   development environment.
+# Site Snapshots
+## **Landing Page**
+![alt text](/images/image.png)
+## **Product Category Page**
+![alt text](/images/image1.png)
+## **Product Details Page**
+![alt text](/images/image3.png)
+## **Cart Details Page**
+![alt text](/images/image2.png)
+## **Orders Page**
+![alt text](/images/image4.png)
+## **List Details Page**
+![alt text](/images/image5.png)
 
-4. Make sure the SQLite3 database connection URL is in the __.env__ file.
+# Feature List
+- Cart
+- Product
+- List
+- Order
+- Review
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention.**
 
-6. Get into your pipenv, migrate your database, seed your database, and run your
-   Flask app:
+# Endpoints
 
-   ```bash
-   pipenv shell
-   ```
+## Auth Routes
 
-   ```bash
-   flask db upgrade
-   ```
+### Current User
+##
+* Purpose: This fetch is sent upon initial app load and on subsequent refreshes and navigations. It returns an object representing the current user, if user is logged in.
+* Method: ```POST```
+* URL: ```/api/auth/```
+* Successful Response: HTTP Status Code 200
+```python
+{
+     "id": INT,
+     "first_name": STRING,
+     "last_name": STRING,
+     "email": STRING,
+     "username": STRING,
+     "address": STRING,
+     "city": STRING,
+     "state": STRING,
+     "zip": INT,
+     "created_at": DATE,
+}
+```
+* Error Response: HTTP Status Code 401
+```python
+{
+  'errors': 'Unauthorized'
+}
+```
+### Unauthorized (from @login_required)
+##
+* Purpose: This endpoint will be routed to in the case that a protected route does not pass validations for the current user.
+* Method ```POST```
+* URL: ```/api/auth/unauthorized```
+* Successful Response: NA
+* Error Response: HTTP Status Code 401
+```python
+{
+  'errors': 'Unauthorized'
+}
+```
+### Sign Up
+##
+* Purpose: This fetch sends the signup form data to the backend to process the creation of a new user.
+* Method: ```POST```
+* URL: ```/api/auth/signup```
+* Successful Response: HTTP Status 201
+```python
+{
+     "id": INT,
+     "first_name": STRING,
+     "last_name": STRING,
+     "email": STRING,
+     "username": STRING,
+     "address": STRING,
+     "city": STRING,
+     "state": STRING,
+     "zip": INT,
+     "created_at": DATE,
+}
+```
+* Error Response: HTTP Status 400
+```python
+{
+   'errors': ARRAY_OF_STRINGS
+}
+```
+### Login
+##
+* Purpose: This fetch attempts to login a user with the provided credentials.
+* Method: ```POST```
+* URL: ```/api/auth/login```
+* Successful Response: HTTP Status 200
+```python
+{
+     "id": INT,
+     "first_name": STRING,
+     "last_name": STRING,
+     "email": STRING,
+     "username": STRING,
+     "address": STRING,
+     "city": STRING,
+     "state": STRING,
+     "zip": INT,
+     "created_at": DATE,
+}
+```
+* Error Response: HTTP Status 400
+```python
+{
+   'errors': ARRAY_OF_STRINGS
+}
+```
+### Logout
+##
+* Purpose: This fetch will logout the current user.
+* Method: ```POST```
+* URL: ```/api/auth/logout```
+* Successful Response: HTTP Status 200
+```python
+{
+   'message': 'User logged Out'
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'No session'
+}
+```
 
-   ```bash
-   flask seed all
-   ```
+## Product Routes
+### Get Products
+* Purpose: This fetch will get all existing products.
+* Method: ```GET```
+* URL: ```/api/products/```
+* Successful Response: HTTP Status 200
+```python
+{
+    [
+        {
+            "category": STRING,
+            "description": STRING,
+            "effect": STRING,
+            "id": INTEGER,
+            "image": STRING,
+            "name": STRING,
+            "price": INTEGER,
+        },
+        ...
+     ]
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
 
-   ```bash
-   flask run
-   ```
+### Get One Product by ID
+* Purpose: This fetch will get an existing product.
+* Method: ```GET```
+* URL: ```/api/products/<int:product_id>```
+* Successful Response: HTTP Status 200
+```python
+{
 
-7. The React frontend has no styling applied. Copy the __.css__ files from your
-   Authenticate Me project into the corresponding locations in the
-   __react-vite__ folder to give your project a unique look.
+     "category": STRING,
+     "description": STRING,
+     "effect": STRING,
+     "id": INTEGER,
+     "image": STRING,
+     "name": STRING,
+     "price": INTEGER,
 
-8. To run the React frontend in development, `cd` into the __react-vite__
-   directory and run `npm i` to install dependencies. Next, run `npm run build`
-   to create the `dist` folder. The starter has modified the `npm run build`
-   command to include the `--watch` flag. This flag will rebuild the __dist__
-   folder whenever you change your code, keeping the production version up to
-   date.
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
 
-## Deployment through Render.com
+## Cart Routes
 
-First, recall that Vite is a development dependency, so it will not be used in
-production. This means that you must already have the __dist__ folder located in
-the root of your __react-vite__ folder when you push to GitHub. This __dist__
-folder contains your React code and all necessary dependencies minified and
-bundled into a smaller footprint, ready to be served from your Python API.
+### Get Current User's Cart
+* Purpose: This fetch will search for the current user's cart.
+* Method: ```GET```
+* URL: ```/api/cart```
+* Successful Response: HTTP Status 200
+```python
+{
+    "id": INTEGER,
+    "updated_at": DATE,
+    "products":
+    [
+        {
+            "category": STRING,
+            "description": STRING,
+            "effect": STRING,
+            "id": INTEGER,
+            "image": STRING,
+            "name": STRING,
+            "price": INTEGER,
+        },
+        ...
+     ]
 
-Begin deployment by running `npm run build` in your __react-vite__ folder and
-pushing any changes to GitHub.
 
-Refer to your Render.com deployment articles for more detailed instructions
-about getting started with [Render.com], creating a production database, and
-deployment debugging tips.
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
 
-From the Render [Dashboard], click on the "New +" button in the navigation bar,
-and click on "Web Service" to create the application that will be deployed.
+### Clear Current User's Cart
+* Purpose: This fetch will clear all products in the current user's cart.
+* Method: ```DELETE```
+* URL: ```/api/cart/clear```
+* Successful Response: HTTP Status 200
+```python
+{
+    "message": "Cleared your cart"
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
+### Remove Product from Current User's Cart
+* Purpose: This fetch will remove a product from the current user's cart based on amount.
+* Method: ```PUT```
+* URL: ```/api/cart/remove/<int:product_id>```
+* Body:
+```python
+{
+   'amount': INTEGER
+}
+```
+* Successful Response: HTTP Status 200
+```python
+{
+    "message": f"Removed {amount} {product} to your cart"
+    }
+```
 
-Select that you want to "Build and deploy from a Git repository" and click
-"Next". On the next page, find the name of the application repo you want to
-deploy and click the "Connect" button to the right of the name.
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
 
-Now you need to fill out the form to configure your app. Most of the setup will
-be handled by the __Dockerfile__, but you do need to fill in a few fields.
+### Add Product to Current User's Cart
+* Purpose: This fetch will add a product to the current user's cart based on amount.
+* Method: ```PUT```
+* URL: ```/api/cart/update/<int:product_id>```
+* Body:
+```python
+{
+   'amount': INTEGER
+}
+```
+* Successful Response: HTTP Status 200
+```python
+{
+    "message": f"Updated {amount} {product} to your cart"
+    }
+```
 
-Start by giving your application a name.
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
 
-Make sure the Region is set to the location closest to you, the Branch is set to
-"main", and Runtime is set to "Docker". You can leave the Root Directory field
-blank. (By default, Render will run commands from the root directory.)
+### Remove all of a Product from Current User's Cart
+* Purpose: This fetch will remove all of a product from the current user's cart.
+* Method: ```PUT```
+* URL: ```/api/cart/remove/<int:product_id>/all```
+* Successful Response: HTTP Status 200
+```python
+{
+    "message": f"Removed {product} from your cart"
+    }
+```
 
-Select "Free" as your Instance Type.
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
+### Purchase Current User's Cart
+* Purpose: This fetch will purchase the contents from the current user's cart.
+* Method: ```POST```
+* URL: ```/api/cart`/purchase``
+* Successful Response: HTTP Status 200
+```python
+{
+    "id": INTEGER,
+    "status": STRING,
+    "total_cost": INTEGER,
+    "delivery_date": DATE,
+    "delivery_address": STRING,
+    "user_id": INTEGER,
+    "created_at": DATE,
+    "products":
+        [
+            {
+                "category": STRING,
+                "description": STRING,
+                "effect": STRING,
+                "id": INTEGER,
+                "image": STRING,
+                "name": STRING,
+                "price": INTEGER,
+            },
+            ...
+        ]
 
-### Add environment variables
 
-In the development environment, you have been securing your environment
-variables in a __.env__ file, which has been removed from source control (i.e.,
-the file is gitignored). In this step, you will need to input the keys and
-values for the environment variables you need for production into the Render
-GUI.
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
 
-Add the following keys and values in the Render GUI form:
+## List Routes
+### Get Lists
+* Purpose: This fetch will get all lists of the current user.
+* Method: ```GET```
+* URL: ```/api/lists/```
+* Successful Response: HTTP Status 200
+```python
+{
+    [
+        {
+            "name": STRING,
+            "id": INTEGER,
+            "products":
+                [
+                    {
+                        "category": STRING,
+                        "description": STRING,
+                        "effect": STRING,
+                        "id": INTEGER,
+                        "image": STRING,
+                        "name": STRING,
+                        "price": INTEGER,
+                    },
+                    ...
+                ]
+            "updated_at": DATE,
+        },
+        ...
+     ]
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
+### Create a list
+* Purpose: This fetch will create a list and assign it to the current user
+* Method: ```POST```
+* URL: ```/api/lists/create```
+* Body:
+```python
+{
+   'name': STRING
+}
+```
+* Successful Response: HTTP Status 200
+```python
+{
+    "name": STRING,
+    "id": INTEGER,
+    "products":
+        [
+            {
+                "category": STRING,
+                "description": STRING,
+                "effect": STRING,
+                "id": INTEGER,
+                "image": STRING,
+                "name": STRING,
+                "price": INTEGER,
+            },
+            ...
+        ]
+    "updated_at": DATE,
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
 
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
 
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
+### Update a list
+* Purpose: This fetch will update an existing list of a user
+* Method: ```PUT```
+* URL: ```/api/lists/edit/<int:id>```
+* Body:
+```python
+{
+   'name': STRING
+}
+```
+* Successful Response: HTTP Status 200
+```python
+{
+    "message": "Submitted edit"
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
 
-Add the following keys and values:
 
-- DATABASE_URL (copy value from the **External Database URL** field)
+### Add a product to a list
+* Purpose: This fetch will add a product to an existing list of a user
+* Method: ```PUT```
+* URL: ```/api/lists/add/<int:id>```
+* Body:
+```python
+{
+   'product_id': INTEGER
+}
+```
+* Successful Response: HTTP Status 200
+```python
+{
+    "messages": f"Added {product} to {list}"
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
 
-**Note:** Add any other keys and values that may be present in your local
-__.env__ file. As you work to further develop your project, you may need to add
-more environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment.
+### Remove a product from a list
+* Purpose: This fetch will remove a product from an existing list of a user
+* Method: ```PUT```
+* URL: ```/api/lists/remove-from-list/<int:id>```
+* Body:
+```python
+{
+   'product_id': INTEGER
+}
+```
+* Successful Response: HTTP Status 200
+```python
+{
+    "message": f"Removed {product} from {list}"
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
 
-### Deploy
 
-Now you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your Dockerfile
-commands being executed and any errors that occur.
 
-When deployment is complete, open your deployed site and check to see that you
-have successfully deployed your Flask application to Render! You can find the
-URL for your site just below the name of the Web Service at the top of the page.
+### Remove a list
+* Purpose: This fetch will remove an existing list of a user
+* Method: ```PUT```
+* URL: ```/api/lists/remove/<int:id>```
+* Successful Response: HTTP Status 200
+```python
+{
+    "message":  "Successfully deleted the list"
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
 
-**Note:** By default, Render will set Auto-Deploy for your project to true. This
-setting will cause Render to re-deploy your application every time you push to
-main, always keeping it up to date.
+## Order Routes
+### Get Orders
+* Purpose: This fetch will get all orders of the current user.
+* Method: ```GET```
+* URL: ```/api/orders/```
+* Successful Response: HTTP Status 200
+```python
+{
+    [
+        {
+            "id": INTEGER,
+            "status": STRING,
+            "total_cost": INTEGER,
+            "delivery_date": DATE,
+            "delivery_address": STRING,
+            "user_id": INTEGER,
+            "created_at": DATE,
+            "products":
+                [
+                    {
+                        "category": STRING,
+                        "description": STRING,
+                        "effect": STRING,
+                        "id": INTEGER,
+                        "image": STRING,
+                        "name": STRING,
+                        "price": INTEGER,
+                    },
+                    ...
+                ]
+        },
+        ...
+     ]
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
 
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+### Get Order
+* Purpose: This fetch will get a single order of the current user by ID.
+* Method: ```GET```
+* URL: ```/api/orders/<int:id>```
+* Successful Response: HTTP Status 200
+```python
+{
+
+    {
+        "id": INTEGER,
+        "status": STRING,
+        "total_cost": INTEGER,
+        "delivery_date": DATE,
+        "delivery_address": STRING,
+        "user_id": INTEGER,
+        "created_at": DATE,
+        "products":
+            [
+                {
+                    "category": STRING,
+                    "description": STRING,
+                    "effect": STRING,
+                    "id": INTEGER,
+                    "image": STRING,
+                    "name": STRING,
+                    "price": INTEGER,
+                },
+                ...
+            ]
+    }
+
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
+
+### Update Order Status
+* Purpose: This fetch will update a single order of the current user by ID.
+* Method: ```PUT```
+* URL: ```/api/orders/<int:id>```
+* Body:
+```python
+{
+   'status': STRING
+}
+```
+* Successful Response: HTTP Status 200
+```python
+{
+
+    {
+        "id": INTEGER,
+        "status": STRING,
+        "total_cost": INTEGER,
+        "delivery_date": DATE,
+        "delivery_address": STRING,
+        "user_id": INTEGER,
+        "created_at": DATE,
+        "products":
+            [
+                {
+                    "category": STRING,
+                    "description": STRING,
+                    "effect": STRING,
+                    "id": INTEGER,
+                    "image": STRING,
+                    "name": STRING,
+                    "price": INTEGER,
+                },
+                ...
+            ]
+    }
+
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
+
+### Cancel Order
+* Purpose: This fetch will cancel a single order of the current user by ID.
+* Method: ```DELETE```
+* URL: ```/api/orders/<int:id>/cancel```
+* Successful Response: HTTP Status 200
+```python
+{
+    "message":  "Order cancelled"
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
+
+## Review Routes
+### Get Reviews
+* Purpose: This fetch will get all reviews by ID.
+* Method: ```GET```
+* URL: ```/api/reviews/<int:id>```
+* Successful Response: HTTP Status 200
+```python
+{
+    "id": INTEGER,
+    "name": STRING,
+    "description": STRING,
+    "updated_at": DATE,
+    "product_id": DATE,
+    "owner":
+        {
+            "id": INTEGER,
+            "username": STRING,
+            "first_name": STRING,
+            "last_name": STRING,
+        },
+    "rating": INTEGER,
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
+
+### Get Reviews for a Product
+* Purpose: This fetch will get all reviews for a single product
+* Method: ```GET```
+* URL: ```/api/reviews/<int:product_id>```
+* Successful Response: HTTP Status 200
+```python
+{
+    [
+
+        {
+            "id": INTEGER,
+            "status": STRING,
+            "total_cost": INTEGER,
+            "delivery_date": DATE,
+            "delivery_address": STRING,
+            "user_id": INTEGER,
+            "created_at": DATE,
+            "products":
+                [
+                    {
+                        "category": STRING,
+                        "description": STRING,
+                        "effect": STRING,
+                        "id": INTEGER,
+                        "image": STRING,
+                        "name": STRING,
+                        "price": INTEGER,
+                    },
+                    ...
+                ]
+        },
+        ...
+    ]
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
+
+### Update Review
+* Purpose: This fetch will update a review if you are the correct user.
+* Method: ```PUT```
+* URL: ```/api/reviews/<int:id>/edit```
+* Body:
+```python
+{
+   "name": STRING,
+   "description": STRING,
+   "rating": INTEGER
+}
+```
+* Successful Response: HTTP Status 200
+```python
+{
+    "messagese": "Updated review"
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
+
+### Cancel Order
+* Purpose: This fetch will cancel a single order of the current user by ID.
+* Method: ```DELETE```
+* URL: ```/api/reviews/<int:id>/delete```
+* Successful Response: HTTP Status 200
+```python
+{
+    "message":  "Review has been deleted"
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
+
+
+# Connect
+[LinkedIn](https://www.linkedin.com/in/tylothedino/)
